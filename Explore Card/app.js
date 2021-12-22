@@ -22,3 +22,5 @@ function upload(obj) {
         img.setAttribute("src",this.result)
     }
 }
+
+
