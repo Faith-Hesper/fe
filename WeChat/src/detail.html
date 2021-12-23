@@ -45,30 +45,38 @@
                 <div class=" weui_panel_bd" id="btn-block">
                     <a class="weui_media_box weui_media_appmsg">
                         <div class="weui_media_hd" style="align-self: baseline;">
-                            <img src="https://note-1306141435.cos.ap-beijing.myqcloud.com/img/20210916210234.jpg" id="starter-icon"
-                                class="list-item-img">
+                            <img src="https://note-1306141435.cos.ap-beijing.myqcloud.com/img/20210916210234.jpg"
+                                id="starter-icon" class="list-item-img">
                         </div>
                         <div class="weui_media_bd">
                             <h4 class="weui_media_title" id="title" style="white-space: normal;font-weight: bold;">
                                 疫情防控期间学生离校请假表</h4>
                             <p class="weui_media_desc">
                                 <span id="starterName"
-                                    style="color: #3FB0FB;text-decoration: underline;">陈海滨</span>&nbsp;&nbsp;<span
-                                    ><input value="2021-09-21 15:41" id="detail" data-name="detail" style="border-style:none" ></span>
+                                    style="color: #3FB0FB;text-decoration: underline;">陈海滨</span>&nbsp;&nbsp;<span><input
+                                        value="2021-09-21 15:41" id="start_times" 
+                                        style="border-style:none"></span>
                             </p>
+                            <p class="weui_media_desc">角色：学生</p>
                             <p class="weui_media_desc">姓名: <input value="陈海滨" id="name" style="border-style:none"></p>
-                            <p class="weui_media_desc">学院: <input value="华北科技学院本科生,建筑工程学院,地理信息科学(05134),地信B192" style="border-style:none" ></p>
-                            <p class="weui_media_desc">班级: <input value="地信B192" style="border-style:none" ></p>
-                            <p class="weui_media_desc">手机: <input value="18133875274" style="border-style:none" ></p>
-                            <p class="weui_media_desc">离校原因: <input value="旅行" style="border-style:none" ></p>
-                            <p class="weui_media_desc">离校去向: <input value="华北科技学院附近" style="border-style:none" ></p>
-                            <p class="weui_media_desc">请假天数: <input value="1" style="border-style:none" ></p>
-                            <p class="weui_media_desc">开始时间:<input value="2021-09-21" id="leavetime" style="border-style:none" ></p>
-                            <p class="weui_media_desc">结束时间: <input value="2021-09-21" id="leavetime" style="border-style:none" ></p>
-                            <p class="weui_media_desc">紧急联系人: <input value="陈海滨 18133875274" id="emergeName" style="border-style:none" ></p>
-                            <p class="weui_media_desc">请假人:<input value="陈海滨" id="name" style="border-style:none" ></p>
-                            <p class="weui_media_desc">日期时间:<span value="2021-09-21" id="leavetime" style="border-style:none" ></span></p>
-                            <p class="weui_media_desc">销假时间: <span value="2021-09-21" id="leavetime" style="border-style:none" ></span></p>
+                            <p class="weui_media_desc">学院: <input value="华北科技学院本科生,建筑工程学院,地理信息科学(05134),地信B192"
+                                    style="border-style:none"></p>
+                            <p class="weui_media_desc">班级: <input value="地信B192" style="border-style:none"></p>
+                            <p class="weui_media_desc">手机: <input value="18133875274" style="border-style:none"></p>
+                            <p class="weui_media_desc">离校原因: <input value="旅行" style="border-style:none"></p>
+                            <p class="weui_media_desc">离校去向: <input value="华北科技学院附近" style="border-style:none"></p>
+                            <p class="weui_media_desc">请假天数: <input value="1" style="border-style:none"></p>
+                            <p class="weui_media_desc">开始时间:<input value="2021-09-21" id="start_time"
+                                    style="border-style:none"></p>
+                            <p class="weui_media_desc">结束时间: <input value="2021-09-21" id="leave_time"
+                                    style="border-style:none"></p>
+                            <p class="weui_media_desc">紧急联系人: <input value="陈海滨 18133875274" id="emergeName"
+                                    style="border-style:none"></p>
+                            <p class="weui_media_desc">请假人:<input value="陈海滨" id="name" style="border-style:none"></p>
+                            <p class="weui_media_desc">日期时间:<span value="2021-09-21" id="start_time"
+                                    style="border-style:none"></span></p>
+                            <p class="weui_media_desc">学号: <span value="2021-09-21" id="stu_id"
+                                style="border-style:none"></span></p>
                             <p id="remark" style="display:none;-webkit-line-clamp: 10;" class="weui_media_desc"></p>
                         </div>
                         <div id="dv-status" class="c-cooperate-status-end">已办结</div>
@@ -81,337 +89,63 @@
         <div id="detail-content-view" style="padding-bottom: 75px;">
             <div id="dv-img-upload" style="margin: 10px 0px;background-color: white;padding: 10px 15px;display: none">
             </div>
-            <div id="dv-attachment" style="background: #fff;">
-
-            </div>
-
+            <div id="dv-attachment" style="background: #fff;"></div>
             <div id="dv-forms">
-                <div id="smart-form-view" style="margin-bottom: 70px;">
-                    <div id="form-item-view" style="display: none;">
-                        <div class="weui_cells_title">
-                            <img src="" class="form-title-icon">
-                            学生离校请假申请审批表
-                        </div>
-                        <div class="weui_cells weui_cells_form">
-
-                            <div style="display: none;" class="form-filed-common not-allow-input">
-                                <div class="weui_cell">
-                                    <div class="weui_cell_hd">
-                                        <label class="weui_label must-input-title" style="color: #666;font-size: 16px;">
-
-                                            <span class="must-input-field">※</span>
-
-                                            姓名
-                                        </label>
-                                    </div>
-                                    <div class="weui_cell_bd weui_cell_primary">
-                                        <input class="weui_input" type="text" name="XingMing" id="XingMing"
-                                            style="text-align: center;" placeholder="请输入姓名" readonly="">
-                                    </div>
-                                </div>
-                                <div class="ht_warn_msg" id="title-warn-msg" style="display: none;margin-top: -5px;">
-                                </div>
-                            </div>
-                            <div style="display: none;" class="form-filed-common not-allow-input">
-                                <div class="weui_cell">
-                                    <div class="weui_cell_hd">
-                                        <label class="weui_label must-input-title" style="color: #666;font-size: 16px;">
-
-                                            <span class="must-input-field">※</span>
-
-                                            学院
-                                        </label>
-                                    </div>
-                                    <div class="weui_cell_bd weui_cell_primary">
-                                        <input class="weui_input" type="text" name="XueYuan" id="XueYuan"
-                                            style="text-align: center;" placeholder="请输入学院" readonly="">
-                                    </div>
-                                </div>
-                                <div class="ht_warn_msg" id="title-warn-msg" style="display: none;margin-top: -5px;">
-                                </div>
-                            </div>
-                            <div style="display: none;" class="form-filed-common not-allow-input">
-                                <div class="weui_cell">
-                                    <div class="weui_cell_hd">
-                                        <label class="weui_label must-input-title" style="color: #666;font-size: 16px;">
-
-                                            <span class="must-input-field">※</span>
-
-                                            班级
-                                        </label>
-                                    </div>
-                                    <div class="weui_cell_bd weui_cell_primary">
-                                        <input class="weui_input" type="text" name="BanJi" id="BanJi"
-                                            style="text-align: center;" placeholder="请输入班级" readonly="">
-                                    </div>
-                                </div>
-                                <div class="ht_warn_msg" id="title-warn-msg" style="display: none;margin-top: -5px;">
-                                </div>
-                            </div>
-                            <div style="display: none;" class="form-filed-common not-allow-input">
-                                <div class="weui_cell">
-                                    <div class="weui_cell_hd">
-                                        <label class="weui_label must-input-title" style="color: #666;font-size: 16px;">
-
-                                            <span class="must-input-field">※</span>
-
-                                            手机
-                                        </label>
-                                    </div>
-                                    <div class="weui_cell_bd weui_cell_primary">
-                                        <input class="weui_input" type="text" name="ShouJi" id="ShouJi"
-                                            style="text-align: center;" placeholder="请输入手机" readonly="">
-                                    </div>
-                                </div>
-                                <div class="ht_warn_msg" id="title-warn-msg" style="display: none;margin-top: -5px;">
-                                </div>
-                            </div>
-                            <div id="textarea" style="display: none;" class="form-filed-common not-allow-input">
-                                <div class="weui_cells_title must-input-title">
-
-                                    <span class="must-input-field">※</span>
-
-                                    离校原因
-                                </div>
-                                <div class="ht_warn_msg" id="title-warn-msg" style="display: none"></div>
-                                <div class="weui_cells_form form-title">
-                                    <div class="weui_cell">
-                                        <div class="weui_cell_bd weui_cell_primary">
-                                            <textarea class="weui_textarea " name="HT8E54FB" id="HT8E54FB"
-                                                placeholder="请输入离校原因" readonly="" rows="3"
-                                                style="text-align: left;"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="display: none;" class="form-filed-common">
-                                <div class="weui_cells_title HT05FCD1 ">
-
-                                    上传材料
-                                </div>
-                                <!--<div class="ht_warn_msg" id="title-warn-msg" style="color: #666;font-size: 14px;">
-    移动端不支持上传附件，如需上传附件请到pc端上传
-</div>-->
-
-                                <div id="attache-eml" style="display: block;">
-                                    <div id="attaches-list">
-                                        <div id="weixin-download-view"
-                                            class="weixin-download-view weui_cells weui_cells_access"
-                                            style="margin-bottom: 10px; background-color: transparent; margin-top: 0px;">
-                                            <div class="file-list"></div>
-
-                                        </div>
-                                    </div>
-                                    <div id="pic-eml" style="display: none;">
-                                        <div class="weui_cells_title">
-                                            图片附件
-                                        </div>
-                                        <div id="pic-list" style="padding: 10px 15px;"></div>
-                                    </div>
-                                </div>
-                                <div class="ht_warn_msg" id="title-warn-msg" style="display: none"></div>
-                            </div>
-                            <div style="display: none;" class="form-filed-common not-allow-input">
-                                <div class="weui_cell">
-                                    <div class="weui_cell_hd">
-                                        <label class="weui_label must-input-title" style="color: #666;font-size: 16px;">
-
-                                            <span class="must-input-field">※</span>
-
-                                            离校去向
-                                        </label>
-                                    </div>
-                                    <div class="weui_cell_bd weui_cell_primary">
-                                        <input class="weui_input" type="text" name="HT26B512" id="HT26B512"
-                                            style="text-align: left;" placeholder="详细地址" readonly="">
-                                    </div>
-                                </div>
-                                <div class="ht_warn_msg" id="title-warn-msg" style="display: none;margin-top: -5px;">
-                                </div>
-                            </div>
-                            <div style="display: none;" class="form-filed-common not-allow-input">
-                                <div class="weui_cell">
-                                    <div class="weui_cell_hd">
-                                        <label class="weui_label must-input-title" style="color: #666;font-size: 16px;">
-
-                                            <span class="must-input-field">※</span>
-
-                                            请假天数
-                                        </label>
-                                    </div>
-                                    <div class="weui_cell_bd weui_cell_primary">
-                                        <input class="weui_input" type="text" name="HT3A786D" id="HT3A786D"
-                                            style="text-align: left;" placeholder="请输入请假天数" readonly="">
-                                    </div>
-                                </div>
-                                <div class="ht_warn_msg" id="title-warn-msg" style="display: none;margin-top: -5px;">
-                                </div>
-                            </div>
-                            <div id="datepicker" style="display: none;" class="form-filed-common not-allow-input">
-                                <div class="weui_cells_title must-input-title">
-
-                                    <span class="must-input-field">※</span>
-
-                                    开始时间
-                                </div>
-                                <div class="ht_warn_msg" id="title-warn-msg" style="display: none"></div>
-                                <div class="weui_cell weui_cell_primary">
-                                    <input name="HTFC6439" id="HTFC6439" class="weui_input" type="text"
-                                        value="2020-10-31" style="text-align: left;" placeholder="请输入开始时间" readonly="">
-                                </div>
-                            </div>
-                            <div id="datepicker" style="display: none;" class="form-filed-common not-allow-input">
-                                <div class="weui_cells_title must-input-title">
-
-                                    <span class="must-input-field">※</span>
-
-                                    结束时间
-                                </div>
-                                <div class="ht_warn_msg" id="title-warn-msg" style="display: none"></div>
-                                <div class="weui_cell weui_cell_primary">
-                                    <input name="HT6FCFD2" id="HT6FCFD2" class="weui_input" type="text"
-                                        value="2020-10-31" style="text-align: left;" placeholder="请输入结束时间" readonly="">
-                                </div>
-                            </div>
-                            <div style="display: none;" class="form-filed-common not-allow-input">
-                                <div class="weui_cell">
-                                    <div class="weui_cell_hd">
-                                        <label class="weui_label must-input-title" style="color: #666;font-size: 16px;">
-
-                                            <span class="must-input-field">※</span>
-
-                                            紧急联系人
-                                        </label>
-                                    </div>
-                                    <div class="weui_cell_bd weui_cell_primary">
-                                        <input class="weui_input" type="text" name="HTE0E237" id="HTE0E237"
-                                            style="text-align: left;" placeholder="姓名+联系电话" readonly="">
-                                    </div>
-                                </div>
-                                <div class="ht_warn_msg" id="title-warn-msg" style="display: none;margin-top: -5px;">
-                                </div>
-                            </div>
-                            <div style="display: none;" class="form-filed-common not-allow-input">
-                                <div class="weui_cell">
-                                    <div class="weui_cell_hd">
-                                        <label class="weui_label must-input-title" style="color: #666;font-size: 16px;">
-
-                                            <span class="must-input-field">※</span>
-
-                                            请假人
-                                        </label>
-                                    </div>
-                                    <div class="weui_cell_bd weui_cell_primary">
-                                        <input class="weui_input" type="text" name="HTF0799D" id="HTF0799D"
-                                            style="text-align: left;" placeholder="请输入请假人" readonly="">
-                                    </div>
-                                </div>
-                                <div class="ht_warn_msg" id="title-warn-msg" style="display: none;margin-top: -5px;">
-                                </div>
-                            </div>
-                            <div id="datepicker" style="display: none;" class="form-filed-common not-allow-input">
-                                <div class="weui_cells_title must-input-title">
-
-                                    <span class="must-input-field">※</span>
-
-                                    日期时间
-                                </div>
-                                <div class="ht_warn_msg" id="title-warn-msg" style="display: none"></div>
-                                <div class="weui_cell weui_cell_primary">
-                                    <input name="HT8DCC40" id="HT8DCC40" class="weui_input" type="text"
-                                        value="2020-10-30" style="text-align: left;" placeholder="请输入日期时间" readonly="">
-                                </div>
-                            </div>
-                            <div style="display: none;" class="form-filed-common not-allow-input">
-                                <div class="weui_cell">
-                                    <div class="weui_cell_hd">
-                                        <label class="weui_label " style="color: #666;font-size: 16px;">
-
-                                            辅导员意见
-                                        </label>
-                                    </div>
-                                    <div class="weui_cell_bd weui_cell_primary">
-                                        <input class="weui_input" type="text" name="FuDaoYuanYiJian"
-                                            id="FuDaoYuanYiJian" style="text-align: left;" placeholder="请输入辅导员意见"
-                                            readonly="">
-                                    </div>
-                                </div>
-                                <div class="ht_warn_msg" id="title-warn-msg" style="display: none;margin-top: -5px;">
-                                </div>
-                            </div>
-                            <div style="display: none;" class="form-filed-common not-allow-input">
-                                <div class="weui_cell">
-                                    <div class="weui_cell_hd">
-                                        <label class="weui_label " style="color: #666;font-size: 16px;">
-
-                                            学院意见
-                                        </label>
-                                    </div>
-                                    <div class="weui_cell_bd weui_cell_primary">
-                                        <input class="weui_input" type="text" name="XueYuanYiJian" id="XueYuanYiJian"
-                                            style="text-align: left;" placeholder="请输入学院意见" readonly="">
-                                    </div>
-                                </div>
-                                <div class="ht_warn_msg" id="title-warn-msg" style="display: none;margin-top: -5px;">
-                                </div>
-                            </div>
-                            <div style="display: none;" class="form-filed-common not-allow-input">
-                                <div class="weui_cell">
-                                    <div class="weui_cell_hd">
-                                        <label class="weui_label " style="color: #666;font-size: 16px;">
-
-                                            学工处意见
-                                        </label>
-                                    </div>
-                                    <div class="weui_cell_bd weui_cell_primary">
-                                        <input class="weui_input" type="text" name="XueGongChuYiJian"
-                                            id="XueGongChuYiJian" style="text-align: left;" placeholder="请输入学工处意见"
-                                            readonly="">
-                                    </div>
-                                </div>
-                                <div class="ht_warn_msg" id="title-warn-msg" style="display: none;margin-top: -5px;">
-                                </div>
-                            </div>
-                            <div style="display: none;" class="form-filed-common not-allow-input">
-                                <div class="weui_cell">
-                                    <div class="weui_cell_hd">
-                                        <label class="weui_label " style="color: #666;font-size: 16px;">
-
-                                            校领导意见
-                                        </label>
-                                    </div>
-                                    <div class="weui_cell_bd weui_cell_primary">
-                                        <input class="weui_input" type="text" name="HT71FE2D" id="HT71FE2D"
-                                            style="text-align: left;" placeholder="请输入校领导意见" readonly="">
-                                    </div>
-                                </div>
-                                <div class="ht_warn_msg" id="title-warn-msg" style="display: none;margin-top: -5px;">
-                                </div>
-                            </div>
-                            <div id="datetimepicker" style="display: none;" class="form-filed-common not-allow-input">
-                                <div class="weui_cells_title must-input-title">
-
-                                    <span class="must-input-field">※</span>
-
-                                    销假时间
-                                </div>
-                                <div class="ht_warn_msg" id="title-warn-msg" style="display: none"></div>
-                                <div class="weui_cell weui_cell_primary">
-                                    <input name="HT6D9AA2" id="HT6D9AA2" class="weui_input" type="text" value=""
-                                        style="text-align: left;" placeholder="请输入销假时间" readonly="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div id="smart-form-view" style="margin-bottom: 70px;"></div>
             </div>
-
             <div id="dv-reply" style="margin-top: 1.17647059em;">
-
                 <div>
                     <div class="weui_panel">
                         <div class="weui_panel_hd">
-                            <img src="https://note-1306141435.cos.ap-beijing.myqcloud.com/img/20210916210234.jpg" class="reply-item-img">
+                            <img src="../img/photo.jpg" class="reply-item-img" />
+                            <a class="user-name" data-user-uuid="e52a9a63-a777-4f04-902a-817a597cc0ac"
+                                style="color: #3fb0fb; text-decoration: underline">李昆遥</a>
+
+                            <a id="btn-reply" class="weui_btn weui_btn_mini weui_btn_primary"
+                                style="float: right">回复</a>
+                        </div>
+                        <div class="weui_panel_bd">
+                            <div class="weui_media_box weui_media_text" style="padding: 5px 15px">
+                                <p class="weui_media_desc reply-opinions" style="display: inherit">
+                                    不好意思，上午监考不能看手机，现在每天下午都有校内核酸检测，如想外出做，时间控制在两小时内
+                                </p>
+
+                                <ul class="weui_media_info" style="margin-top: 0px">
+                                    <li class="weui_media_info_meta" style="color: #999">
+                                        <span style="color: #999">已通过</span>
+                                    </li>
+                                    <li class="weui_media_info_meta" id="leave_time">2021-12-18 13:22</li>
+                                    <li class="weui_media_info_meta" style="float: right; padding-right: 0px">
+                                        用时3小时
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weui_panel">
+                        <div class="weui_panel_hd">
+                            <img src="../img/photo_002.jpg" class="reply-item-img" />
+                            <a class="user-name" data-user-uuid="f6f8148d-23af-4e36-9a9d-2719271e23c2"
+                                style="color: #3fb0fb; text-decoration: underline">陈海滨</a>
+                        </div>
+                        <div class="weui_panel_bd">
+                            <div class="weui_media_box weui_media_text" style="padding: 5px 15px">
+                                <p class="weui_media_desc reply-opinions" style="display: inherit"></p>
+
+                                <ul class="weui_media_info" style="margin-top: 0px">
+                                    <li class="weui_media_info_meta" style="color: #999">已浏览</li>
+                                    <li class="weui_media_info_meta" id="leave_time">2021-12-18 13:23</li>
+                                    <li class="weui_media_info_meta" style="float: right; padding-right: 0px">
+                                        用时1分钟
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weui_panel">
+                        <div class="weui_panel_hd">
+                            <img src="https://note-1306141435.cos.ap-beijing.myqcloud.com/img/20210916210234.jpg"
+                                class="reply-item-img">
                             <a class="user-name" data-user-uuid="8b419380-034a-49ee-a670-95f82e7f37ed"
                                 style="color: #3FB0FB;text-decoration: underline;">刘洋</a>
                         </div>
@@ -421,78 +155,49 @@
 
                                 <ul class="weui_media_info" style="margin-top: 0px;">
                                     <li class="weui_media_info_meta" style="color:#999;">
-
                                         已通过-自动审批
                                     </li>
-                                    <li class="weui_media_info_meta"><input value="2020-10-31" id="leavetime" style="border-style:none" ></li>
-                                    <li class="weui_media_info_meta" style="float: right;padding-right: 0px;">用时2分钟</li>
+                                    <li class="weui_media_info_meta"><input value="2020-10-31" id="leave_time"
+                                            style="border-style:none"></li>
+                                    <li class="weui_media_info_meta" style="float: right;padding-right: 0px;">
+                                        用时2分钟</li>
                                 </ul>
                             </div>
-
                         </div>
-
                     </div>
                 </div>
             </div>
-
-
-
             <div id="btn-addhuanjie" style="display: none;">
-                <div id="dv-huanjie">
-                </div>
-                <!--<div class="weui_cells_title">下一环节处理人员</div>
-    <div style="padding: 10px 15px;background: #fff;">
-        <a href="javascript:;" class="weui_btn weui_btn_blue" id="open-popup">选择下环节处理人</a>
-    </div>-->
+                <div id="dv-huanjie"></div>
+                <div id="dv-copyto"></div>
             </div>
-
-            <!--<div id="" class="weui-popup-container" style="bottom: 60px;height: auto;top: 0;">
-    <div class="weui-popup-overlay"></div>
-    <div class="weui-popup-modal">
-        <div id="dv-huanjie">
-
-        </div>
-        <div style="padding: 10px 15px;background: #fff;">
-            <a href="javascript:;" class="weui_btn weui_btn_blue close-popup">关闭</a>
-        </div>
-    </div>
-</div>-->
-
-            <div id="dv-copyto">
-
-            </div>
-        </div>
-        <div id="detail-footer-view" style="display: none;">
-            <div class="ht_footer_bar" style="z-index: 9;">
-                <div class="ht_footer_bar_center">
-                    <a class="weui_btn weui_btn_primary" id="btn-chuli">处理</a>
-                    <a class="weui_btn weui_btn_primary" id="btn-submit" style="display: none;margin-top:0;">确定</a>
+            <div id="detail-footer-view" style="display: none;">
+                <div class="ht_footer_bar" style="z-index: 9;">
+                    <div class="ht_footer_bar_center">
+                        <a class="weui_btn weui_btn_primary" id="btn-chuli">处理</a>
+                        <a class="weui_btn weui_btn_primary" id="btn-submit" style="display: none;margin-top:0;">确定</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div id="form-iframe-view" style="height: 711px; min-height: 711px; overflow: hidden; display: none;"
-        data-role="page" class="">
-        <div class="weui_navbar ">
+        <div id="form-iframe-view" style="height: 711px; min-height: 711px; overflow: hidden; display: none;"
+            data-role="page" class="">
+            <div class="weui_navbar ">
+                <a class="weui_navbar_item" id="btn-base">
+                    处理表单
+                </a>
+                <a class="weui_navbar_item weui_bar_item_on" id="btn-form">
+                    表单预览
+                </a>
+                <a class="weui_navbar_item" id="btn-flow">
+                    查看流程
+                </a>
 
-
-            <a class="weui_navbar_item" id="btn-base">
-                处理表单
-            </a>
-            <a class="weui_navbar_item weui_bar_item_on" id="btn-form">
-                表单预览
-            </a>
-            <a class="weui_navbar_item" id="btn-flow">
-                查看流程
-            </a>
-
+            </div>
+            <!-- /header -->
+            <iframe id="weui-iframe" src="" class="cooperate-inner-iframe" __idm_frm__="32212254721"></iframe>
         </div>
-        <!-- /header -->
-        <iframe id="weui-iframe"
-            src=""
-            class="cooperate-inner-iframe" __idm_frm__="32212254721"></iframe>
-    </div>
-    <script src="../js/login.js"></script>
+        <script src="../js/login.js"></script>
 </body>
 
 </html>
