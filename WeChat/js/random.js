@@ -6,3 +6,5 @@ $Cookie("姓名", usr_name, {});
 $Cookie("姓名");
 $Cookie("学号", stu_ID, {});
 $Cookie("学号");
+
+
