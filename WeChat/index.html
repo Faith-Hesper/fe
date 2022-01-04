@@ -39,7 +39,7 @@
         <div data-v-70419e1b="" id="home-tab" class="home-tab">
             <ul data-v-0e16977e="" data-v-70419e1b="" class="nav-tab" style="">
                 <li data-v-0e16977e="" class="router-link-exact-active router-link-active"> 我的服务 </li>
-                <li data-v-0e16977e="" class=""> 我收到的 </li>
+                <li data-v-0e16977e="" class="" id="my_receive"> 我收到的 </li>
                 <li data-v-0e16977e="" class="" id="my_send"> 我发出的 </li>
                 <li data-v-0e16977e="" class=""> 我转办的 </li>
             </ul>
@@ -355,6 +355,10 @@
 </body>
 <script>
     const my_send = document.querySelector("#my_send");
+    const my_receive = document.querySelector("#my_receive");
+    my_receive.addEventListener('click',()=>{
+        location.href="./src/my_receive.html"
+    })
     my_send.addEventListener('click', () => {
         location.href = "./src/my_issues.html";
     })
