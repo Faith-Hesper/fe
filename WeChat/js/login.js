@@ -32,16 +32,16 @@ function showTime(params) {
 
     // 开始时间
     start_time.forEach((start_time) => {
-        start_time.setAttribute(
-            "value",
-            `${years}-${month}-${day} ${start_hours}:${start_minutes}:${start_seconds}`
-        );
+        // start_time.setAttribute(
+        //     "value",
+        //     `${years}-${month}-${day} ${start_hours}:${start_minutes}:${start_seconds}`
+        // );
         start_time.textContent = `${years}-${month}-${day} ${hours}:${start_minutes}:${start_seconds}`;
     });
 
     // 结束时间
     leave_time.forEach((leave_time) => {
-        leave_time.setAttribute("value", `${years}-${month}-${day} ${hours}:${minutes}:${seconds}`);
+        // leave_time.setAttribute("value", `${years}-${month}-${day} ${hours}:${minutes}:${seconds}`);
         leave_time.textContent = `${years}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     });
 
@@ -49,17 +49,18 @@ function showTime(params) {
         stu_ids.textContent = stu_id;
         console.log(startTime);
         if (startTime != null) {
-            startTime.setAttribute(
-                "value",
-                `${usrname} 发起于 ${years}-${month}-${day} ${start_hours}:${start_minutes}`
-            );
+            // startTime.setAttribute(
+            //     "value",
+            //     `${usrname} 发起于 ${years}-${month}-${day} ${start_hours}:${start_minutes}`
+            // );
+            startTime.textContent = `${usrname} 发起于 ${years}-${month}-${day} ${start_hours}:${start_minutes}`
         } else {
             starterName.textContent = usrname;
         }
     } catch (error) { }
     try {
-        start_times.setAttribute("value", `${years}-${month}-${day} ${start_hours}:${start_minutes}`);
-        start_times.textContent = `${years}-${month}-${day} ${hours}:${minutes}`;
+        // start_times.setAttribute("value", `${years}-${month}-${day} ${start_hours}:${start_minutes}`);
+        start_times.textContent = `${years}-${month}-${day} ${start_hours}:${start_minutes}`;
     } catch (error) { }
 }
 
@@ -70,9 +71,11 @@ function doubleNum(num) {
 
 function nameSet(params) {
     Usrname.forEach((Usrname) => {
-        Usrname.setAttribute("value", `${usrname}`);
+        // Usrname.setAttribute("value", `${usrname}`);    // 设置标签属性
+        Usrname.textContent = usrname   // 设置标签间内容
     });
-    emergeName.setAttribute("value", `${usrname} 18133875274`);
+    // emergeName.setAttribute("value", `${usrname} 18133875274`);
+    emergeName.textContent = usrname + " 18133875274"
 }
 window.onload = showTime;
 // showTime()
