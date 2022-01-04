@@ -9,8 +9,7 @@ const start_time = document.querySelectorAll("#start_time");
 const leave_time = document.querySelectorAll("#leave_time");
 const Usrname = document.querySelectorAll("#name");
 const stu_ids = document.getElementById("stu_id");
-// let names = ["李鑫", '刘黎', '潘石屹', '吴海安','李雅静',' 韩梦洁','王安晏','赵博超','钟哲圣','李沁','张雨琪','张雨绮','李世民','邓海洋','梦琪','王忆柳','张惜文','李慕青','叶安志']
-// let name = names[Math.floor(Math.random() * names.length)];
+
 function showTime(params) {
     let nowtime = new Date();
     let years = nowtime.getFullYear();
@@ -63,10 +62,12 @@ function showTime(params) {
         start_times.textContent = `${years}-${month}-${day} ${hours}:${minutes}`;
     } catch (error) { }
 }
+
 function doubleNum(num) {
     if (num < 10) return "0" + num;
     return num;
 }
+
 function nameSet(params) {
     Usrname.forEach((Usrname) => {
         Usrname.setAttribute("value", `${usrname}`);
