@@ -1,4 +1,4 @@
-function setCookie(name, value, {expires,path,domain,secure}) {
+function setCookie(name, value, { expires, path, domain, secure }) {
     let cookieStr = encodeURIComponent(name) + "=" + encodeURIComponent(value);
     if (expires) {
         cookieStr += ";expires=" + afterofDate(expires);
@@ -16,6 +16,7 @@ function setCookie(name, value, {expires,path,domain,secure}) {
 }
 
 function getCookie(name) {
+    // 解码
     let cookieStr = decodeURIComponent(document.cookie);
     let start = cookieStr.indexOf(name + "=");
     if (start == -1) {

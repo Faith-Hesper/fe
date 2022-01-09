@@ -20,7 +20,9 @@
     <!-- 清除浏览器缓存@end -->
     <title>处理表单</title>
     <link rel="stylesheet" href="../css/cooperate.css">
-    <script src="../js/cookie.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <!--<script src="../js/cookie.js"></script>-->
 </head>
 
 <body ontouchstart="" class="all-background-color all-border-top">
@@ -45,33 +47,32 @@
                 <div class=" weui_panel_bd" id="btn-block">
                     <a class="weui_media_box weui_media_appmsg">
                         <div class="weui_media_hd" style="align-self: baseline;">
-                            <img src="https://note-1306141435.cos.ap-beijing.myqcloud.com/img/20210916210234.jpg"
+                            <img src="../img/photo_002.jpg"
                                 id="starter-icon" class="list-item-img">
                         </div>
                         <div class="weui_media_bd">
                             <h4 class="weui_media_title" id="title" style="white-space: normal;font-weight: bold;">
                                 疫情防控期间学生离校请假表</h4>
                             <p class="weui_media_desc">
-                                <span id="starterName"
-                                    style="color: #3FB0FB;text-decoration: underline;">陈海滨</span>&nbsp;&nbsp;<span data-v-dc644556="" class="value" id="start_times">
+                                <span id="name"
+                                    style="color: #3FB0FB;text-decoration: underline;"></span>&nbsp;&nbsp;<span data-v-dc644556="" class="value" id="start_times"></span>
                             </p>
                             <p class="weui_media_desc">角色：学生</p>
-                            <p class="weui_media_desc">姓名: <span data-v-dc644556="" class="value" id="name"></p>
-                            <p class="weui_media_desc">学院: <input value="华北科技学院本科生,建筑工程学院,地理信息科学(05134),地信B192"
-                                    style="border-style:none"></p>
+                            <p class="weui_media_desc">姓名: <span data-v-dc644556="" class="value" id="name"></span></p>
+                            <p class="weui_media_desc">学院: <span data-v-dc644556="" class="value" id="college">华北科技学院本科生,建筑工程学院,地理信息科学(05134),地信B192</span></p>
                             <p class="weui_media_desc">班级: <span data-v-dc644556="" class="value" id="class">地信B192</span></p>
-                            <p class="weui_media_desc">手机: <span data-v-dc644556="" class="value" id="phone">18133875271</span></p>
-                            <p class="weui_media_desc">离校原因: <span data-v-dc644556="" class="value" id="">看牙</span></p>
-                            <p class="weui_media_desc">离校去向: <span data-v-dc644556="" class="value" id="">华北科技学院附近</span></p>
-                            <p class="weui_media_desc">请假天数: <span data-v-dc644556="" class="value" id="">1</span></p>
+                            <p class="weui_media_desc">手机: <span data-v-dc644556="" class="value" id="phone"></span></p>
+                            <p class="weui_media_desc">离校原因: <span data-v-dc644556="" class="value" id="leave_reason">看牙</span></p>
+                            <p class="weui_media_desc">离校去向: <span data-v-dc644556="" class="value" id="leave_to">华北科技学院附近</span></p>
+                            <p class="weui_media_desc">请假天数: <span data-v-dc644556="" class="value" id="leave_day">1</span></p>
                             <p class="weui_media_desc">开始时间:<span data-v-a01fb670="" value="2021-09-21"
                                 id="start_time"></span></p>
                             <p class="weui_media_desc">结束时间: <span data-v-a01fb670="" value="2021-09-21"
                                 id="leave_time" style="border-style:none"></span></p>
                             <p class="weui_media_desc">紧急联系人: <span value="2021-09-21" id="emergeName"
                                 style="border-style:none"></span></p>
-                            <p class="weui_media_desc">请假人:<span data-v-dc644556="" class="value" id="name"></span></p>
-                            <p class="weui_media_desc">日期时间:<span value="2021-09-21" id="start_time"
+                            <p class="weui_media_desc">请假人: <span data-v-dc644556="" class="value" id="name"></span></p>
+                            <p class="weui_media_desc">日期时间: <span value="2021-09-21" id="start_time"
                                     style="border-style:none"></span></p>
                             <p class="weui_media_desc">学号: <span value="2021-09-21" id="stu_id"
                                 style="border-style:none"></span></p>
@@ -97,7 +98,7 @@
                         <div class="weui_panel_hd">
                             <img src="../img/photo.jpg" class="reply-item-img" />
                             <a class="user-name" data-user-uuid="e52a9a63-a777-4f04-902a-817a597cc0ac"
-                                style="color: #3fb0fb; text-decoration: underline">李昆遥</a>
+                                style="color: #3fb0fb; text-decoration: underline" id="tutor">李昆遥</a>
 
                             <a id="btn-reply" class="weui_btn weui_btn_mini weui_btn_primary"
                                 style="float: right">回复</a>
@@ -124,7 +125,7 @@
                         <div class="weui_panel_hd">
                             <img src="../img/photo_002.jpg" class="reply-item-img" />
                             <a class="user-name" data-user-uuid="f6f8148d-23af-4e36-9a9d-2719271e23c2"
-                                style="color: #3fb0fb; text-decoration: underline">陈海滨</a>
+                                style="color: #3fb0fb; text-decoration: underline" id="name"></a>
                         </div>
                         <div class="weui_panel_bd">
                             <div class="weui_media_box weui_media_text" style="padding: 5px 15px">
@@ -142,10 +143,10 @@
                     </div>
                     <div class="weui_panel">
                         <div class="weui_panel_hd">
-                            <img src="https://note-1306141435.cos.ap-beijing.myqcloud.com/img/20210916210234.jpg"
+                            <img src="../img/photo_002.jpg"
                                 class="reply-item-img">
                             <a class="user-name" data-user-uuid="8b419380-034a-49ee-a670-95f82e7f37ed"
-                                style="color: #3FB0FB;text-decoration: underline;">刘洋</a>
+                                style="color: #3FB0FB;text-decoration: underline;" id="tutor">刘洋</a>
                         </div>
                         <div class="weui_panel_bd">
                             <div class="weui_media_box weui_media_text" style="padding: 5px 15px;">
@@ -155,8 +156,7 @@
                                     <li class="weui_media_info_meta" style="color:#999;">
                                         已通过-自动审批
                                     </li>
-                                    <li class="weui_media_info_meta"><input value="2020-10-31" id="leave_time"
-                                            style="border-style:none"></li>
+                                    <li class="weui_media_info_meta" id="leave_time"></li>
                                     <li class="weui_media_info_meta" style="float: right;padding-right: 0px;">
                                         用时2分钟</li>
                                 </ul>
@@ -196,6 +196,7 @@
             <iframe id="weui-iframe" src="" class="cooperate-inner-iframe" __idm_frm__="32212254721"></iframe>
         </div>
         <script src="../js/login.js"></script>
+    </div>
 </body>
 
 </html>

@@ -1,14 +1,23 @@
 // 名字Cookie
-let usrname = $Cookie("姓名");
-let stu_id = $Cookie("学号");
-const startTime = document.getElementById("startTime"); // 发起时间
+let usrname = $.cookie("姓名");
+let stu_id = $.cookie("学号");
+let tutor = $.cookie("导员");
+let phone = $.cookie("phone");
+const startTime = document.getElementById("startTime"); // 发起人+发起于+发起时间
 const start_times = document.getElementById("start_times");
-const starterName = document.getElementById("starterName"); // 发起人
-const emergeName = document.getElementById("emergeName");
+const emergeName = document.getElementById("emergeName"); // 紧急联系人
 const start_time = document.querySelectorAll("#start_time");
 const leave_time = document.querySelectorAll("#leave_time");
 const Usrname = document.querySelectorAll("#name");
-const stu_ids = document.getElementById("stu_id");
+const tutor_a = document.querySelectorAll("#tutor"); // 导员
+const stu_ids = document.getElementById("stu_id"); // 学号
+const phone_p = document.getElementById("phone"); // 手机号
+const college = document.getElementById("college"); // 学院
+const clases = document.getElementById("class"); // 班级
+const leave_reason = document.getElementById("leave_reason");
+const leave_to = document.getElementById("leave_to");
+const leave_day = document.getElementById("leave_day");
+
 
 function showTime(params) {
     let nowtime = new Date();
@@ -29,7 +38,9 @@ function showTime(params) {
     // alert(`${years}-${month}-${day} ${hours}:${minutes}`)
 
     nameSet();
-
+    
+    stu_ids.textContent = stu_id;
+    
     // 开始时间
     start_time.forEach((start_time) => {
         // start_time.setAttribute(
@@ -46,8 +57,6 @@ function showTime(params) {
     });
 
     try {
-        stu_ids.textContent = stu_id;
-        console.log(startTime);
         if (startTime != null) {
             // startTime.setAttribute(
             //     "value",
@@ -55,12 +64,12 @@ function showTime(params) {
             // );
             startTime.textContent = `${usrname} 发起于 ${years}-${month}-${day} ${start_hours}:${start_minutes}`
         } else {
-            starterName.textContent = usrname;
+            start_times.textContent = `${years}-${month}-${day} ${start_hours}:${start_minutes}`;
+            // 详情页导员名字
+            tutor_a.forEach((tutor_a) =>{
+                tutor_a.textContent = tutor;
+            })
         }
-    } catch (error) { }
-    try {
-        // start_times.setAttribute("value", `${years}-${month}-${day} ${start_hours}:${start_minutes}`);
-        start_times.textContent = `${years}-${month}-${day} ${start_hours}:${start_minutes}`;
     } catch (error) { }
 }
 
@@ -75,7 +84,53 @@ function nameSet(params) {
         Usrname.textContent = usrname   // 设置标签间内容
     });
     // emergeName.setAttribute("value", `${usrname} 18133875274`);
-    emergeName.textContent = usrname + " 18133875274"
+    emergeName.textContent = usrname + " " + phone;
+    phone_p.textContent = phone;
 }
-window.onload = showTime;
-// showTime()
+
+function set_form(argument) {
+    Usrname.forEach((Usrname) => {
+        Usrname.textContent = $.cookie('name')   // 设置标签间内容
+    });
+    emergeName.textContent = $.cookie('name') + " " + $.cookie('phone');
+    stu_ids.textContent = $.cookie('stu_id');
+    college.textContent = $.cookie('college');
+    clases.textContent = $.cookie('class');
+    phone_p.textContent = $.cookie('phone');
+    leave_reason.textContent = $.cookie('leave_reason');
+    leave_to.textContent = $.cookie('leave_to');
+    leave_day.textContent = $.cookie('leave_day');
+    start_time.forEach((start_time) => {
+        start_time.textContent = $.cookie('start_time');
+    });
+    leave_time.forEach((start_time) => {
+        leave_time.textContent = $.cookie('leave_time');
+    });
+    try {
+        var time = $.cookie('start_time');
+        time = time.substring(0,time.length-3)
+        if (startTime != null) {
+            //console.log(time)
+            startTime.textContent = `${$.cookie('name')} 发起于 ${time}` 
+        } else {
+            start_times.textContent = `${time}`;
+            // 详情页导员名字
+            tutor_a.forEach((tutor_a) =>{
+                tutor_a.textContent = $.cookie('tutor');
+            })
+        }
+    } 
+    catch (error) { }
+}
+
+function main(argument) {
+    if($.cookie('name'))
+    {
+        set_form();
+    }else{
+        showTime();
+    }
+}
+
+window.onload = main;
+

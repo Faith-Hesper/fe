@@ -19,6 +19,8 @@
     <link href="../css/chunk-vendors.css" rel="stylesheet">
     <link href="../css/index.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../css/FlowMessageListMobilePortal.css">
+    <script src="https://cdn.staticfile.org/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="../js/cookie.js" rel="modulepreload" as="script"></script>
     <link rel="stylesheet" type="text/css" href="../css/Flow.css">
 </head>
@@ -67,18 +69,17 @@
                                 <p data-v-a01fb670="" class="desc ht-text-assist van-ellipsis"><span data-v-a01fb670=""
                                         class="key">姓名：</span><span data-v-dc644556="" class="value" id="name"></span></p>
                                 <p data-v-a01fb670="" class="desc ht-text-assist van-ellipsis"><span data-v-a01fb670=""
-                                        class="key">学院：</span><input data-v-a01fb670=""
-                                        value="华北科技学院本科生,建筑工程学院,地理信息科学(05134),地信B192" style="border-style:none"></p>
+                                        class="key">学院：</span><span data-v-dc644556="" class="value" id="college">华北科技学院本科生,建筑工程学院,地理信息科学(05134),地信B192</span></p>
                                 <p data-v-a01fb670="" class="desc ht-text-assist van-ellipsis"><span data-v-a01fb670=""
                                         class="key">班级：</span><span data-v-dc644556="" class="value" id="class">地信B192</span></p>
                                 <p data-v-a01fb670="" class="desc ht-text-assist van-ellipsis"><span data-v-a01fb670=""
-                                        class="key">手机：</span><span data-v-dc644556="" class="value" id="phone">18133875271</span></p>
+                                        class="key">手机：</span><span data-v-dc644556="" class="value" id="phone"></span></p>
                                 <p data-v-a01fb670="" class="desc ht-text-assist van-ellipsis"><span data-v-a01fb670=""
-                                        class="key">离校原因：</span><span data-v-dc644556="" class="value" id="">看牙</span></p>
+                                        class="key">离校原因：</span><span data-v-dc644556="" class="value" id="leave_reason">看牙</span></p>
                                 <p data-v-a01fb670="" class="desc ht-text-assist van-ellipsis"><span data-v-a01fb670=""
-                                        class="key">离校去向：</span><span data-v-dc644556="" class="value" id="">华北科技学院附近</span></p>
+                                        class="key">离校去向：</span><span data-v-dc644556="" class="value" id="leave_to">华北科技学院附近</span></p>
                                 <p data-v-a01fb670="" class="desc ht-text-assist van-ellipsis"><span data-v-a01fb670=""
-                                        class="key">请假天数：</span><span data-v-a01fb670="" value="1"
+                                        class="key">请假天数：</span><span data-v-a01fb670="" value="1" id="leave_day"
                                         style="border-style:none">1</span></p>
                                 <p data-v-a01fb670="" class="desc ht-text-assist van-ellipsis"><span data-v-a01fb670=""
                                         class="key">开始时间：</span><span data-v-a01fb670="" value="2021-09-21"
@@ -95,9 +96,8 @@
                                 <p data-v-a01fb670="" class="desc ht-text-assist van-ellipsis"><span data-v-a01fb670=""
                                         class="key">日期时间：</span><span data-v-a01fb670="" value="2021-09-21"
                                         id="start_time" style="border-style:none"></span></p>
-                                </p>
                                 <p data-v-dc644556="" class="desc ht-text-assist van-ellipsis"><span data-v-dc644556=""
-                                        class="key" >学号：</span><span data-v-dc644556="" class="value" id="stu_id">201905134230</span>
+                                        class="key" >学号：</span><span data-v-dc644556="" class="value" id="stu_id"></span>
                                 </p>
                             </div>
                             <div data-v-a01fb670="" class="arrow-wrap"><i data-v-a01fb670=""
