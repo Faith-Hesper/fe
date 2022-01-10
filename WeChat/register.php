@@ -1,7 +1,7 @@
 <?php
     header("content-type:text/html;charset=utf8");
 	// 连接数据库 服务器 用户名 密码 数据库名
-    $link = mysqli_connect('localhost','lntano_top','CFdhyZeApkMDtxPx','lntano_top');
+    $link = mysqli_connect('localhost','1','1','1'); //  note 修改实际信息
     //$_POST = mysqli_real_escape_string($link,$_POST);
     // 字符转义
     $username = mysqli_real_escape_string($link,$_POST['username']);
