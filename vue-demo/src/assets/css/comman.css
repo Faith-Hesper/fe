@@ -1,0 +1,12 @@
+body,ul{
+    margin: 0;
+    padding: 0;
+    text-align: left;
+
+}
+div,p,ul,li,a{
+    text-align: left;
+    text-decoration: none;
+    /* 去除列表默认样式 */
+    list-style-type: none; 
+}
