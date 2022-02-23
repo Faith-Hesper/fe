@@ -32,15 +32,25 @@
             </router-link>
         </div>
         <CovCount :covNumChange="covNumChange"></CovCount>
-        <div id="main" style="width: 100%; height: 20rem"></div>
+        <van-tabs v-model="active" type="card" animated swipeable @change="onClickTab">
+            <van-tab title="累积确诊">
+                <div id="main" style="width: 100%; height: 25rem;"></div>
+            </van-tab>
+            <van-tab title="现存确诊">
+                <div id="main2" style="width: 100%; height: 25rem;"></div>
+            </van-tab>
+        </van-tabs>
+        <World></World>
     </div>
 </template>
 
 <script>
 // import CovInfo from './CovInfo/CovInfo.vue'
 import CovCount from './CovInfo/CovCount.vue'
+import World from '../components/World/World.vue'
 import api from '../api/base.js'
 import bus from '../eventBus.js'
+import echarts from '../echarts/echarts.js'
 
 export default {
     name: 'Home',
@@ -49,13 +59,17 @@ export default {
             news: [],
             covNumChange: {},
             covDesc: {},
-            provinceData: [],
-            times: ''
+            confirmed: [],
+            now_confirm: [],
+            times: '',
+            // v-model 表单数据双向绑定
+            active: 0
         }
     },
     components: {
         // CovInfo,
         CovCount,
+        World
     },
     created() {
         api.getCovInfo().then((res) => {
@@ -95,126 +109,44 @@ export default {
     },
     mounted() {
         // 省份数据
-        api.getData().then((res) => {
-            const {data: {data: {worldlist,list,times}}} = res
-            this.times =  times + '累积确诊:' 
-            // console.log(res);
-            // console.log(worldlist,list);
+        // const data = api.getData() 
+        api.getData().then((res)=> {
+            const {data: {data: {list,times}}} = res
+            this.times =  times + '现有确诊病例数，排除治愈、死亡' 
+            console.log(res);
+            // console.log(list);
             list.forEach((item,index)=>{
                 // 累积确诊
                 let data = {name: item.name, value: item.value}
                 // console.log(data);
-                this.provinceData.push(data)
+                this.confirmed.push(data)
+                // 现存确诊
+                let now_confirm_list = {name: item.name, value: item.econNum}
+                this.now_confirm.push(now_confirm_list)
             })
-            // this.provinceData = list
-            // console.log(this.provinceData);
-        this.chart()
-
+            // console.log(this.confirmed);
+            // console.log(this.now_confirm);
+            this.$nextTick(()=>{
+                echarts.chart('main',this.times,this.confirmed)
+            })
         })
-            .catch((err) => {
-                console.log(err)
-            })
+        
+            
     },
     methods: {
-        // Info () {
-        //     bus.$emit('share',this.covDesc)
-        // }
-        chart() {
-            // 基于准备好的dom，初始化echarts实例
-            var main = document.getElementById('main')
-            var myChart = this.$echarts.init(main)
-            // 指定图表的配置项和数据
-            var option = {
-                title: {
-                    text: this.times,
-                    left: 'center',
-                    textStyle: {
-                        color: '#333',
-                        fontStyle: 'italic',
-                        fontSize: 10,
-                        fontWeight: 'normal'
-                    }
-                },
-                tooltip: {
-                    show: true,
-                    trigger: 'item',
-                    triggerOn: 'click',
-                    position: 'bottom',
-                    formatter: '地区: {b}<br>确诊:{c}',
-                    textStyle: {
-                        fontStyle: 'italic',
-                        fontSize: 10,
-                        fontWeight: 'normal'
-                    }
-                },
-                visualMap: {
-                    // 离散
-                    type: 'piecewise',
-                    // 图形垂直排列
-                    orient: 'vertical',
-                    // 图形在文字右边
-                    align: 'left',
-                    inRange: {
-                        color: ['#ffc0b1', '#ff8c71', '#ef1717', '#9c0505'],
-                    },
-                    /* 不指定 min/max，表示 min/max 为无限大（Infinity）。
-                    表示 value 等于 123 的情况。*/
-                    pieces: [
-                        { gt: 10000 },
-                        { gt: 2500, lte:5000},
-                        { min: 1000, max: 2500},
-                        { min: 500, max: 1000 }, 
-                        { min: 100, max: 500 },
-                        { min: 10, max: 100 },
-                        { lt: 10, color: 'grey' }, 
-                    ],
-                    // 文本与小块距离
-                    textGap: 5,
-                    // 每个小块间的距离
-                    itemGap: 2,
-                    showLabel: true,
-                    itemWidth: 10,
-                    itemHeight: 10,
-                    textStyle: {
-                        color: '#333',
-                        fontSize: 10
-                    }
-                },
-                series: [
-                    {
-                        name: '省',
-                        type: 'map',
-                        map: 'china',
-                        zoom: 1.2,
-                        // 漫遊和縮放
-                        roam: true,
-                        // 标签
-                        label: {
-                            show: true,
-                            formatter: '{b}',
-                            fontSize: 10,
-                        },
-                        itemStyle: {
-                            color: '#029fd4',
-                            // 选中区域高亮
-                            emphasis: {
-                                areaColor: '#ddb926',
-                                opacity: 0.8,
-                                shadowColor: 'rgba(0, 0, 0, 0.5)',
-                                // 模糊度
-                                shadowBlur: 10,
-                                // 垂直方向上偏移量
-                                shadowOffsetY: 2,
-                            },
-                        },
-                        data: this.provinceData,
-                    },
-                ],
-            }
-            // 使用刚指定的配置项和数据显示图表。
-            myChart.setOption(option)
-            console.log(option);
-        },
+        onClickTab(title) {
+            // this.active = 1
+            /** vant库组件在mounted前未渲染组件内DOM
+             *  用change事件手动触发echarts图表渲染
+             * $nextTick 延迟调用函数
+             */
+            if(title==1){
+                this.$nextTick(()=>{
+                echarts.chart('main2',this.times,this.now_confirm)
+                // console.log(title); 
+            })}
+            console.log(this.active); 
+        }
     },
 }
 </script>

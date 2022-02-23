@@ -14,6 +14,7 @@ const headers = {
     'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
     'Access-Control-Allow-Credentials': 'true',
 }
+
 const api = {
     getCovInfo(){
         return axios.get(base.host+base.covInfo)

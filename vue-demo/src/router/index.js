@@ -2,6 +2,7 @@ import Vue from "vue"
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import CovInfo from '../views/CovInfo/CovInfo.vue'
+import Province from '../components/Province/Province.vue'
 
 // 安装为Vue项目插件
 Vue.use(VueRouter)
@@ -13,9 +14,15 @@ const routes = [
         component: Home
     },
     {
-        path: '/CovInfo',
+        path: '/covInfo',
         name: 'CovInfo',
         component: CovInfo
+    },
+    {
+        path: '/province/:cityName',
+        name: 'Province',
+        component: Province,
+        props: true
     }
 ]
 
