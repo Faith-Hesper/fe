@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="world">
         <div>国外疫情</div>
-        <van-tabs v-model="active" type="card" animated swipeable @change="change">
+        <van-tabs v-model="active" type="card" color="#00bec7" sticky animated swipeable @change="change">
             <van-tab title="累积确诊">
                 <div id="main3" style="width: 100%; height: 25rem"></div>
             </van-tab>
@@ -70,4 +70,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="less" scoped>
+.world {
+    margin-top: 1rem;
+}
+</style>

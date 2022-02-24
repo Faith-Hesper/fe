@@ -12,15 +12,15 @@ module.exports = {
     productionSourceMap: false,//生产环境是否生成 sourceMap 文件
     devServer: {
         proxy: {
-            // 在这里配置如下代码
-            '/interface.sina.cn/': {
-                target: 'https://interface.sina.cn/news', // 将/interface.sina.cn代理为https://interface.sina.cn/
+            // 以/interface代替/interface.sina.cn,将所有https://interface.sina.cn请求重写为https:/interface
+            '/interface': {
+                target: 'https://interface.sina.cn', // 将/interface.sina.cn代理为https://interface.sina.cn/
                 ws: true,
                 changeOrigin: true, // 在本地会创建一个虚拟服务端，然后发送请求的数据，并同时接收请求的数据，这样服务端和服务端进行数据的交互就不会有跨域问题
                 secure: true,
                 pathRewrite: {
                     // 路径重写，
-                    '^/interface.sina.cn/': '', // 替换target中的请求地址，也就是说以后你在请求http://api.qingyunke.com/api.php这个地址的时候直接写成/api即可。
+                    '^/interface': 'https://interface.sina.cn', // 替换target中的请求地址，也就是说以后你在请求http://api.qingyunke.com/api.php这个地址的时候直接写成/api即可。
                 },
             },
             '/api': {

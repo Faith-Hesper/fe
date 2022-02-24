@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <img src="../assets/img/1.png" alt="" width="100%" />
+        <img src="../assets/img/1.png" alt="" height="30%" width="100%" />
         <div class="CovInfo">
             <router-link to="/CovInfo">
                 <div class="title">病毒信息</div>
@@ -32,14 +32,7 @@
             </router-link>
         </div>
         <CovCount :covNumChange="covNumChange"></CovCount>
-        <van-tabs v-model="active" type="card" animated swipeable @change="onClickTab">
-            <van-tab title="累积确诊">
-                <div id="main" style="width: 100%; height: 25rem;"></div>
-            </van-tab>
-            <van-tab title="现存确诊">
-                <div id="main2" style="width: 100%; height: 25rem;"></div>
-            </van-tab>
-        </van-tabs>
+        <China></China>
         <World></World>
     </div>
 </template>
@@ -48,9 +41,9 @@
 // import CovInfo from './CovInfo/CovInfo.vue'
 import CovCount from './CovInfo/CovCount.vue'
 import World from '../components/World/World.vue'
+import China from '../components/China/China.vue'
 import api from '../api/base.js'
 import bus from '../eventBus.js'
-import echarts from '../echarts/echarts.js'
 
 export default {
     name: 'Home',
@@ -59,16 +52,13 @@ export default {
             news: [],
             covNumChange: {},
             covDesc: {},
-            confirmed: [],
-            now_confirm: [],
-            times: '',
-            // v-model 表单数据双向绑定
-            active: 0
+
         }
     },
     components: {
         // CovInfo,
         CovCount,
+        China,
         World
     },
     created() {
@@ -108,45 +98,10 @@ export default {
         
     },
     mounted() {
-        // 省份数据
-        // const data = api.getData() 
-        api.getData().then((res)=> {
-            const {data: {data: {list,times}}} = res
-            this.times =  times + '现有确诊病例数，排除治愈、死亡' 
-            console.log(res);
-            // console.log(list);
-            list.forEach((item,index)=>{
-                // 累积确诊
-                let data = {name: item.name, value: item.value}
-                // console.log(data);
-                this.confirmed.push(data)
-                // 现存确诊
-                let now_confirm_list = {name: item.name, value: item.econNum}
-                this.now_confirm.push(now_confirm_list)
-            })
-            // console.log(this.confirmed);
-            // console.log(this.now_confirm);
-            this.$nextTick(()=>{
-                echarts.chart('main',this.times,this.confirmed)
-            })
-        })
-        
-            
+
     },
     methods: {
-        onClickTab(title) {
-            // this.active = 1
-            /** vant库组件在mounted前未渲染组件内DOM
-             *  用change事件手动触发echarts图表渲染
-             * $nextTick 延迟调用函数
-             */
-            if(title==1){
-                this.$nextTick(()=>{
-                echarts.chart('main2',this.times,this.now_confirm)
-                // console.log(title); 
-            })}
-            console.log(this.active); 
-        }
+
     },
 }
 </script>

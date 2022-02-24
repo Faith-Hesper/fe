@@ -1,40 +1,40 @@
 <template>
-    <div class="statistics container-fluid">
+    <div class="statistics">
         <div class="title">截止北京时间 {{ covNumChange.modifytime | time }}</div>
-        <b-list-group horizontal class="list-unstyled">
-            <li class="list-group-item flex-fill">
-                <span>较昨日{{ covNumChange.currentConfirmedIncr | symbol }}</span>
-                <div class="bold">{{ covNumChange.currentConfirmedCount }}</div>
+        <van-row>
+            <van-col span="8">
                 <span>现存确诊</span>
-            </li>
-            <li class="list-group-item flex-fill">
-                <span>较昨日{{ covNumChange.suspectedIncr | symbol }}</span>
-                <div class="bold">{{ covNumChange.suspectedCount }}</div>
+                <div class="bold">{{ covNumChange.currentConfirmedCount }}</div>
+                <span class="addrecent">较昨日{{ covNumChange.currentConfirmedIncr | symbol }}</span>
+            </van-col>
+            <van-col span="8">
                 <span>境外输入</span>
-            </li>
-            <li class="list-group-item flex-fill">
-                <span>较昨日{{ covNumChange.seriousIncr | symbol }}</span>
-                <div class="bold">{{ covNumChange.seriousCount }}</div>
+                <div class="bold">{{ covNumChange.suspectedCount }}</div>
+                <span class="addrecent">较昨日{{ covNumChange.suspectedIncr | symbol }}</span>
+            </van-col>
+            <van-col span="8">
                 <span>现存无症状</span>
-            </li>
-        </b-list-group>
-        <b-list-group horizontal class="list-unstyled">
-            <li class="list-group-item flex-fill">
-                <span>较昨日{{ covNumChange.confirmedIncr | symbol }}</span>
-                <div class="bold">{{ covNumChange.confirmedCount }}</div>
+                <div class="bold">{{ covNumChange.seriousCount }}</div>
+                <span class="addrecent">较昨日{{ covNumChange.seriousIncr | symbol }}</span>
+            </van-col>
+        </van-row>
+        <van-row>
+            <van-col span="8">
                 <span>累积确诊</span>
-            </li>
-            <li class="list-group-item flex-fill">
-                <span>较昨日{{ covNumChange.deadIncr | symbol }}</span>
-                <div class="bold">{{ covNumChange.deadCount }}</div>
+                <div class="bold">{{ covNumChange.confirmedCount }}</div>
+                <span class="addrecent">较昨日{{ covNumChange.confirmedIncr | symbol }}</span>
+            </van-col>
+            <van-col span="8">
                 <span>累积死亡</span>
-            </li>
-            <li class="list-group-item flex-fill">
-                <span>较昨日{{ covNumChange.curedIncr | symbol }}</span>
-                <div class="bold">{{ covNumChange.curedCount }}</div>
+                <div class="bold">{{ covNumChange.deadCount }}</div>
+                <span class="addrecent">较昨日{{ covNumChange.deadIncr | symbol }}</span>
+            </van-col>
+            <van-col span="8">
                 <span>累积治愈</span>
-            </li>
-        </b-list-group>
+                <div class="bold">{{ covNumChange.curedCount }}</div>
+                <span class="addrecent">较昨日{{ covNumChange.curedIncr | symbol }}</span>
+            </van-col>
+        </van-row>
     </div>
 </template>
 
@@ -66,6 +66,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.statistics {
+    margin-top: 1rem;
+}
 .title{
     font-size: 0.8rem;
     color: #666;
@@ -73,5 +76,9 @@ export default {
 }
 li{
     border: none;
+}
+.addrecent {
+    font-size: 0.4rem;
+    color: #999;
 }
 </style>

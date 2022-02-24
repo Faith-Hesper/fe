@@ -1,22 +1,16 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from '../src/router/index.js'
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/js/bootstrap.min'
-// import echarts from 'echarts'
-// import 'echarts/map/js/china'
-import { Tab, Tabs } from 'vant';
+import { Image as VanImage, Col, Row, Tab, Tabs } from 'vant';
 
 Vue.config.productionTip = false
-// Install BootstrapVue
-Vue.use(BootstrapVue)
-// Optionally install the BootstrapVue icon components plugin
-Vue.use(IconsPlugin)
-// Vue.prototype.$echarts = echarts
+
 
 Vue.use(Tab)
 Vue.use(Tabs)
+Vue.use(Col)
+Vue.use(Row)
+Vue.use(VanImage)
 
 new Vue({
   render: h => h(App),
