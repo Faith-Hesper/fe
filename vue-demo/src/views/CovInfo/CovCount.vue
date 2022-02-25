@@ -5,36 +5,37 @@
             <van-col span="8">
                 <span>现存确诊</span>
                 <div class="bold">{{ covNumChange.currentConfirmedCount }}</div>
-                <span class="addrecent">较昨日{{ covNumChange.currentConfirmedIncr | symbol }}</span>
+                <span v-if="covNumChange.currentConfirmedIncr" class="addrecent">较昨日{{ covNumChange.currentConfirmedIncr | symbol }}</span>
             </van-col>
             <van-col span="8">
                 <span>境外输入</span>
                 <div class="bold">{{ covNumChange.suspectedCount }}</div>
-                <span class="addrecent">较昨日{{ covNumChange.suspectedIncr | symbol }}</span>
+                <span v-if="covNumChange.suspectedIncr" class="addrecent">较昨日{{ covNumChange.suspectedIncr | symbol }}</span>
             </van-col>
             <van-col span="8">
                 <span>现存无症状</span>
                 <div class="bold">{{ covNumChange.seriousCount }}</div>
-                <span class="addrecent">较昨日{{ covNumChange.seriousIncr | symbol }}</span>
+                <span v-if="covNumChange.seriousIncr" class="addrecent">较昨日{{ covNumChange.seriousIncr | symbol }}</span>
             </van-col>
         </van-row>
         <van-row>
             <van-col span="8">
                 <span>累积确诊</span>
                 <div class="bold">{{ covNumChange.confirmedCount }}</div>
-                <span class="addrecent">较昨日{{ covNumChange.confirmedIncr | symbol }}</span>
+                <span v-if="covNumChange.confirmedIncr" class="addrecent">较昨日{{ covNumChange.confirmedIncr | symbol }}</span>
             </van-col>
             <van-col span="8">
                 <span>累积死亡</span>
                 <div class="bold">{{ covNumChange.deadCount }}</div>
-                <span class="addrecent">较昨日{{ covNumChange.deadIncr | symbol }}</span>
+                <span v-if="covNumChange.deadIncr" class="addrecent">较昨日{{ covNumChange.deadIncr | symbol }}</span>
             </van-col>
             <van-col span="8">
                 <span>累积治愈</span>
                 <div class="bold">{{ covNumChange.curedCount }}</div>
-                <span class="addrecent">较昨日{{ covNumChange.curedIncr | symbol }}</span>
+                <span v-if="covNumChange.curedIncr" class="addrecent">较昨日{{ covNumChange.curedIncr | symbol }}</span>
             </van-col>
         </van-row>
+        <div v-if="!covNumChange.currentConfirmedIncr" style="color: #999; font-size: .6875rem;">昨日变化数据：待国家卫健委公布后更新</div>
     </div>
 </template>
 
@@ -49,10 +50,44 @@ export default {
     },
     data() {
         return {
-            
+            list_content: [],
         }
     },
+    created() {
+        this.list_content = [{
+            name: '现存确诊',
+            num: '',
+            add: '较昨日'
+        },
+        {
+            name: '境外输入',
+            num: '',
+            add: '较昨日'
+        },
+        {
+            name: '现存无症状',
+            num: '',
+            add: '较昨日'
+        },
+        {
+            name: '累积确诊',
+            num: '',
+            add: '较昨日'
+        },
+        {
+            name: '累积死亡',
+            num: '',
+            add: '较昨日'
+        },
+        {
+            name: '累积治愈',
+            num: '',
+            add: '较昨日'
+        },
+        ]
+    },
     filters: {
+        // 设置加号
         symbol: function (val) {
             val = val>0?'+'+val:val;
             return val;
@@ -67,7 +102,7 @@ export default {
 
 <style lang="less" scoped>
 .statistics {
-    margin-top: 1rem;
+    // margin-top: 1rem;
 }
 .title{
     font-size: 0.8rem;

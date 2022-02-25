@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import CovInfo from '../views/CovInfo/CovInfo.vue'
 import Province from '../components/Province/Province.vue'
+import covDetection from '../components/covDetection/covDetection.vue'
 
 // 安装为Vue项目插件
 Vue.use(VueRouter)
@@ -18,6 +19,12 @@ const routes = [
         name: 'CovInfo',
         component: CovInfo
     },
+    {
+        path: '/covDetection',
+        name: 'covDetection',
+        component: covDetection
+    },
+    // 动态绑定路由
     {
         path: '/province/:cityName',
         name: 'Province',

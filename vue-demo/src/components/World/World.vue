@@ -1,12 +1,11 @@
 <template>
     <div class="world">
-        <div>国外疫情</div>
         <van-tabs v-model="active" type="card" color="#00bec7" sticky animated swipeable @change="change">
-            <van-tab title="累积确诊">
-                <div id="main3" style="width: 100%; height: 25rem"></div>
-            </van-tab>
             <van-tab title="现存确诊">
                 <div id="main4" style="width: 100%; height: 25rem"></div>
+            </van-tab>
+            <van-tab title="累积确诊">
+                <div id="main3" style="width: 100%; height: 25rem"></div>
             </van-tab>
         </van-tabs>
     </div>
@@ -47,7 +46,7 @@ export default {
             // console.log(this.world_confirmed);
             // console.log(this.now_confirm);
             this.$nextTick(()=>{
-                echarts.world_chart('main3',this.times,this.world_confirmed)
+                echarts.world_chart('main4',this.times,this.world_now_confirm)
             })
         })
             
@@ -61,7 +60,7 @@ export default {
              */
             if(title==1){
                 this.$nextTick(()=>{
-                echarts.world_chart('main4',this.times,this.world_now_confirm)
+                echarts.world_chart('main3',this.times,this.world_confirmed)
                 // console.log(title); 
             })}
             console.log(this.active); 

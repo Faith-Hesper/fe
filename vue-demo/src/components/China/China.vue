@@ -1,14 +1,40 @@
 <template>
     <div>
+        <div>近期疫情分布</div>
+        <div>
+            <table class="table table-striped table-hover">
+                <!-- 表头 -->
+                <thead>
+                <tr>
+                    <td>地区</td>
+                    <td>昨日本土新增</td>
+                    <td>现存确诊</td>
+                    <td>风险地区</td>
+                    <td>疫情</td>
+                </tr>
+                </thead>
+                <!--  -->
+                <tbody>
+                <tr v-for="item in riskArea" :key="item.locationId">
+                    <td>{{ item.provinceShortName }}</td>
+                    <td>{{ item.yesterdayLocalConfirmedCount }}</td>
+                    <td>{{ item.currentConfirmedCount }}</td>
+                    <td>{{ item.currentDangerCount }}</td>
+                    <td>详情</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
         <van-tabs v-model="active" type="card" color="#00bec7" sticky animated swipeable @change="onClickTab">
-            <van-tab title="累积确诊">
-                <div id="main" style="width: 100%; height: 25rem"></div>
-            </van-tab>
             <van-tab title="现存确诊">
                 <div id="main2" style="width: 100%; height: 25rem"></div>
             </van-tab>
+            <van-tab title="累积确诊">
+                <div id="main" style="width: 100%; height: 25rem"></div>
+            </van-tab>
         </van-tabs>
-        <van-tabs v-model="active" type="card" color="#00bec7" sticky animated swipeable>
+
+        <van-tabs v-model="actives" type="card" color="#00bec7" sticky animated swipeable>
             <van-tab title="境外输入省级Top10">
                 <div id="jwsrTop" style="width: 100%; height: 25rem"></div>
             </van-tab>
@@ -19,6 +45,7 @@
 <script>
 import api from '../../api/base.js'
 import echarts from '../../echarts/echarts.js'
+
 export default {
     data() {
         return {
@@ -26,10 +53,20 @@ export default {
             now_confirm: [],
             jwsr_name: [],
             jwsr_value: [],
+            riskArea: [],
             times: '',
             // v-model 表单数据双向绑定
-            active: 0
+            active: 0,
+            actives: 0
         }
+    },
+    created() {
+        this.riskArea = api.getDxy().then(res=>{
+            let { data: dom } = res
+            this.riskArea =  JSON.parse(dom.getElementById('fetchRecentStatV2').text.split('=')[1].slice(0,-11))
+            
+        })
+        // console.log(this.riskArea);
     },
     mounted() {
         // 省份数据
@@ -37,7 +74,7 @@ export default {
         api.getData().then((res)=> {
             const {data: {data: {list,jwsrTop,times}}} = res
             this.times =  times + '现有确诊病例数，排除治愈、死亡' 
-            console.log(res);
+            // console.log(res);
             // console.log(list);
             list.forEach((item,index)=>{
                 // 累积确诊
@@ -56,11 +93,13 @@ export default {
             // console.log(this.confirmed);
             // console.log(this.now_confirm);
             this.$nextTick(()=>{
-                echarts.chart('main',this.times,this.confirmed)
+                echarts.chart('main2',this.times,this.now_confirm)
             })
             this.$nextTick(()=>{
                 echarts.jwsrTop_chart('jwsrTop','境外输入Top10',this.jwsr_name,this.jwsr_value)
             })
+        }).catch(err=>{
+            console.log(err);
         })
     },
     methods: {
@@ -71,7 +110,7 @@ export default {
           * $nextTick 延迟调用函数*/
         if(title==1){
             this.$nextTick(()=>{
-            echarts.chart('main2',this.times,this.now_confirm)
+            echarts.chart('main',this.times,this.confirmed)
             // console.log(title); 
         })}
         console.log(this.active); 
@@ -80,4 +119,5 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+</style>

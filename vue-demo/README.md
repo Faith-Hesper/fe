@@ -19,11 +19,25 @@ npm run build
 See [Configuration Reference](https://cli.vuejs.org/config/).
 ### 接口
     ```
+    新浪
     econNum 现有确诊
     conNum 累积确诊
     deathNum 累积死亡
     cureNum 累积治愈
     jwsrNum 境外输入
+    丁香园
+    provinceName 辽宁省
+    provinceShortName 辽宁
+    getAreaStat 省份数据
+        confirmedCount 累积确诊
+        deadCount 累积死亡
+        curedCount 治愈
+        currentConfirmedCount 现存确诊
+        suspectedCount
+    getListByCountryTypeService2true 世界数据
+    fetchRecentStatV2 近期疫情分布 | 高中风险地区
+        yesterdayLocalConfirmedCount 昨日本土新增
+        currentDangerCount 风险地区
     ```
 ### 部署
 1. 配置vue

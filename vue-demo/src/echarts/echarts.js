@@ -249,7 +249,7 @@ const chart = {
                 enterable: true,
                 position: 'bottom',
                 formatter(item) {
-                    return '">地区: '+ item.name + '<br/>确诊:'+item.value
+                    return '地区: '+ item.name + '<br/>确诊: '+item.value
                 },
                 textStyle: {
                     fontStyle: 'italic',
@@ -295,7 +295,7 @@ const chart = {
                     name: '省',
                     type: 'map',
                     map: cityName,
-                    zoom: 1.5,
+                    zoom: 1.2,
                     // 漫遊和縮放
                     roam: true,
                     // 标签
@@ -382,26 +382,12 @@ const chart = {
             },
             series: [
                 {
-                    name: '省',
                     type: 'bar',
                     // 标签
                     label: {
                         show: false,
                         formatter: '{b}',
                         fontSize: 10,
-                    },
-                    itemStyle: {
-                        color: '#029fd4',
-                        // 选中区域高亮
-                        emphasis: {
-                            areaColor: '#ddb926',
-                            opacity: 0.8,
-                            shadowColor: 'rgba(0, 0, 0, 0.5)',
-                            // 模糊度
-                            shadowBlur: 10,
-                            // 垂直方向上偏移量
-                            shadowOffsetY: 2,
-                        },
                     },
                     data: yData,
                 },

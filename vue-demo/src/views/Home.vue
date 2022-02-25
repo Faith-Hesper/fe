@@ -18,7 +18,7 @@
                 <img src="../assets/img/2.png" alt="" />
                 <span>免费问诊</span>
             </router-link>
-            <router-link to="/">
+            <router-link to="/covDetection">
                 <img src="../assets/img/2.png" alt="" />
                 <span>核酸检测</span>
             </router-link>
@@ -31,8 +31,10 @@
                 <span>出行政策</span>
             </router-link>
         </div>
+        <div style="text-align: left; margin-top: .625rem; font-size: 1rem; font-weight: 700;">国内疫情</div>
         <CovCount :covNumChange="covNumChange"></CovCount>
         <China></China>
+        <div style="text-align: left; margin-tip: .625rem; font-size: 1rem; font-weight: 700;">国外疫情</div>
         <World></World>
     </div>
 </template>

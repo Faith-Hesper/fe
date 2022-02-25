@@ -32,6 +32,23 @@ module.exports = {
                     // '^/api'是一个正则表达式，表示要匹配请求的url中，全部'http://localhost:8081/api' 转接为 http://localhost:8081/
                     '^/api.tianapi.com': '',
                 }
+            },
+            '/ncov': {
+                target: 'https://ncov.dxy.cn',
+                changeOrigin: true,
+                secure: true,
+                pathRewrite: {
+                    '^/ncov': 'https://ncov.dxy.cn'
+                }
+            },
+            '/juhe': {
+                target: 'https://apis.juhe.cn',
+                ws: true,
+                changeOrigin: true,
+                secure: true,
+                pathRewrite: {
+                    '^/juhe': 'https://apis.juhe.cn'
+                }
             }
         },
     }
