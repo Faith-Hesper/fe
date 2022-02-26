@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from '../src/router/index.js'
-import { Image as VanImage, Col, Row, Tab, Tabs, List, TreeSelect } from 'vant';
+import { Image as VanImage,Button , Icon , Col, Row, Tab, Tabs, List, TreeSelect } from 'vant';
 // import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -15,6 +15,8 @@ Vue.use(Row)
 Vue.use(List)
 Vue.use(VanImage)
 Vue.use(TreeSelect)
+Vue.use(Button )
+Vue.use(Icon )
 
 new Vue({
   render: h => h(App),

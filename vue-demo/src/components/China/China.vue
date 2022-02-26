@@ -1,30 +1,38 @@
 <template>
-    <div>
-        <div>近期疫情分布</div>
-        <div>
-            <table class="table table-striped table-hover">
+    <div class="china">
+        <div class="china">
+        <div class="china">近期疫情分布</div>
+            <table class="table table-striped table-hover" style="text-align: left;">
                 <!-- 表头 -->
                 <thead>
                 <tr>
-                    <td>地区</td>
-                    <td>昨日本土新增</td>
-                    <td>现存确诊</td>
-                    <td>风险地区</td>
-                    <td>疫情</td>
+                    <td style="background: #e3e7f3;">地区</td>
+                    <td style="background: #e69a8d;">昨日本土新增</td>
+                    <td style="background: #f3bab0;">现存确诊</td>
+                    <td style="background: #b4c0d5;">风险地区</td>
+                    <td style="background: #e3e7f3;">疫情</td>
                 </tr>
                 </thead>
-                <!--  -->
+                <!-- <van-icon name="arrow-down" /> -->
                 <tbody>
-                <tr v-for="item in riskArea" :key="item.locationId">
-                    <td>{{ item.provinceShortName }}</td>
+                <tr v-for="item in riskArea" :key="item.locationId" style="text-align: left;">
+                    <td style="background-color:#00bec9;"><div class="bt" @click="listClick(item.cities,$event)"> <img src="../../assets/img/index.png" style="width: 0.8rem; margin-right: 5px">{{item.provinceShortName}}</div></td>
+                    <td>{{ item.yesterdayLocalConfirmedCount }}</td>
+                    <td>{{ item.currentConfirmedCount }}</td>
+                    <td>{{ item.currentDangerCount }}</td>
+                    <td @click="detail(item.statisticsData)"><a>详情</a></td>
+                </tr>
+                <!-- <tr v-for="item in riskArea[0]" :key="item.locationId">
+                    <td><div class="bt" @click="listClick">{{item.provinceShortName}}</td>
                     <td>{{ item.yesterdayLocalConfirmedCount }}</td>
                     <td>{{ item.currentConfirmedCount }}</td>
                     <td>{{ item.currentDangerCount }}</td>
                     <td>详情</td>
-                </tr>
+                </tr> -->
                 </tbody>
             </table>
         </div>
+        <div class="china">
         <van-tabs v-model="active" type="card" color="#00bec7" sticky animated swipeable @change="onClickTab">
             <van-tab title="现存确诊">
                 <div id="main2" style="width: 100%; height: 25rem"></div>
@@ -33,12 +41,14 @@
                 <div id="main" style="width: 100%; height: 25rem"></div>
             </van-tab>
         </van-tabs>
-
+        </div>
+        <div class="china">
         <van-tabs v-model="actives" type="card" color="#00bec7" sticky animated swipeable>
             <van-tab title="境外输入省级Top10">
                 <div id="jwsrTop" style="width: 100%; height: 25rem"></div>
             </van-tab>
         </van-tabs>
+        </div>
     </div>
 </template>
 
@@ -57,20 +67,20 @@ export default {
             times: '',
             // v-model 表单数据双向绑定
             active: 0,
-            actives: 0
+            actives: 0,
+            dataStatistic: -1
         }
     },
     created() {
-        this.riskArea = api.getDxy().then(res=>{
-            let { data: dom } = res
-            this.riskArea =  JSON.parse(dom.getElementById('fetchRecentStatV2').text.split('=')[1].slice(0,-11))
-            
-        })
-        // console.log(this.riskArea);
+        this.getRiskAreaData()
     },
     mounted() {
+        this.getChinaData()
+    },
+    methods: {
+        // 现存确诊、累积确诊、Top10境外输入数据
+        getChinaData () {
         // 省份数据
-        // const data = api.getData() 
         api.getData().then((res)=> {
             const {data: {data: {list,jwsrTop,times}}} = res
             this.times =  times + '现有确诊病例数，排除治愈、死亡' 
@@ -101,8 +111,17 @@ export default {
         }).catch(err=>{
             console.log(err);
         })
-    },
-    methods: {
+        },
+        // 风险地区数据
+        getRiskAreaData() {
+            this.riskArea = api.getDxy().then(res=>{
+            let { data: dom } = res
+            // 解析丁香园dom得到数据
+            this.riskArea =  JSON.parse(dom.getElementById('fetchRecentStatV2').text.split('=')[1].slice(0,-11))
+            console.log(this.riskArea);
+        })
+        },
+        // 调用累积确诊
         onClickTab(title) {
         // this.active = 1
         /** vant库组件在mounted前未渲染组件内DOM
@@ -114,10 +133,24 @@ export default {
             // console.log(title); 
         })}
         console.log(this.active); 
-    }
+        },
+        listClick(cityes,event) {
+            console.log(cityes,event);
+        },
+        detail(da) {
+            console.log(da);
+        }
     },
 }
 </script>
 
-<style>
+<style lang="less" scoped>
+.china {
+    margin-bottom: 0.2rem;
+}
+.bt {
+    width: 100%;
+    color: #f5f6f7;
+    background-color:#00bec9;
+}
 </style>

@@ -40,6 +40,9 @@ const api = {
     },
     favourCity() {
         return axios.get(base.juhe+'/citys'+base.juhekey)
+    },
+    detectArea(cityId) {
+        return axios.get('/juhe/springTravel/hsjg'+base.juhekey+'&city_id='+cityId)
     }
 }
 
