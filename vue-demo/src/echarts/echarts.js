@@ -397,5 +397,80 @@ const chart = {
         myChart.setOption(option)
         // console.log(option);
     },
+    pro(id,title,xData,yData) {
+        // 基于准备好的dom，初始化echarts实例
+        var main = document.getElementById(id)
+        var myChart = echarts.init(main)
+        // 指定图表的配置项和数据
+        var option = {
+            color: ["#3398DB"],
+            title: {
+                text: title,
+                left: 'center',
+                textStyle: {
+                    color: '#333',
+                    fontStyle: 'italic',
+                    fontSize: 10,
+                    fontWeight: 'normal'
+                }
+            },
+            tooltip: {
+                show: true,
+                trigger: 'axis',
+            },
+            xAxis: {
+                type: 'category',
+                data: xData,
+                axisTick: {
+                    show: false
+                },
+                // x轴坐标轴标签文字颜色、间隔
+                axisLabel: {
+                    color: '#999',
+                    interval: 0,
+                },
+                axisLine: {
+                    show: false
+                },
+                // // x坐标轴指示器
+                // axisPointer: {
+                //     show: true,
+                //     type: 'line',
+                //     label: {
+                //         show: true,
+                //         formatter: '日期: {value}'
+                //     }
+                // }
+            },
+            yAxis: {
+                type: 'value',
+                axisTick: {
+                    show: false
+                },
+                axisLabel: {
+                    color: '#999',
+                    interval: 0,
+                },
+                axisLine: {
+                    show: false
+                }
+            },
+            series: [
+                {
+                    type: 'line',
+                    // 标签
+                    label: {
+                        show: false,
+                        formatter: '现存确诊: {b}',
+                        fontSize: 10,
+                    },
+                    data: yData,
+                },
+            ],
+        }
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option)
+        // console.log(option);
+    },
 }
 export default chart 

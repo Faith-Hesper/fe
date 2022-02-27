@@ -3,6 +3,15 @@ import axios from 'axios'
 // 它可以通过设置一个 `baseURL` 便于为 axios 实例的方法传递相对 URL
 // axios.defaults.baseURL = '/interface'
 
+// 添加请求拦截器
+axios.interceptors.request.use(function (config) {
+    // 在发送请求之前做些什么
+    return config;
+}, function (error) {
+    // 对请求错误做些什么
+    return Promise.reject(error);
+});
+
 const base = {
     host: 'https://api.tianapi.com/',
     covInfo: 'ncov/index?key=61abdb275a0249299eeb6392a8f53e07',
@@ -43,6 +52,9 @@ const api = {
     },
     detectArea(cityId) {
         return axios.get('/juhe/springTravel/hsjg'+base.juhekey+'&city_id='+cityId)
+    },
+    province_recent(json) {
+        return axios.get(json)
     }
 }
 

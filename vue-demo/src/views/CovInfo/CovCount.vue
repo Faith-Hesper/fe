@@ -105,7 +105,7 @@ export default {
     // margin-top: 1rem;
 }
 .title{
-    font-size: 0.8rem;
+    font-size: 1rem;
     color: #666;
     text-align: left;
 }
@@ -113,7 +113,7 @@ li{
     border: none;
 }
 .addrecent {
-    font-size: 0.4rem;
+    font-size: 1rem;
     color: #999;
 }
 </style>

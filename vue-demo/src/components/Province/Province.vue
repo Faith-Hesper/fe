@@ -1,6 +1,7 @@
 <template>
     <div>
         <div id="province" style="width: 100%; height: 50rem"></div>
+        <div id="province_recent" style="width: 100%; height: 50rem"></div>
     </div>
 </template>
 

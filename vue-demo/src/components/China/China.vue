@@ -20,7 +20,7 @@
                     <td>{{ item.yesterdayLocalConfirmedCount }}</td>
                     <td>{{ item.currentConfirmedCount }}</td>
                     <td>{{ item.currentDangerCount }}</td>
-                    <td @click="detail(item.statisticsData)"><a>详情</a></td>
+                    <td><a @click="detail(item.provinceShortName,item.statisticsData)" :href='"#/province/"+item.provinceShortName'>详情</a></td>
                 </tr>
                 <!-- <tr v-for="item in riskArea[0]" :key="item.locationId">
                     <td><div class="bt" @click="listClick">{{item.provinceShortName}}</td>
@@ -68,7 +68,10 @@ export default {
             // v-model 表单数据双向绑定
             active: 0,
             actives: 0,
-            dataStatistic: -1
+            dataStatistic: -1,
+            recentData: [],
+            dateId: [],
+            currentConfirmedCount: [],
         }
     },
     created() {
@@ -137,8 +140,29 @@ export default {
         listClick(cityes,event) {
             console.log(cityes,event);
         },
-        detail(da) {
-            console.log(da);
+        detail(provinceShortName,province_json) {
+            console.log(province_json);
+            api.province_recent(province_json).then((res)=>{
+                const { data:{ data:datas } } = res
+                for(let i=datas.length-18; i < datas.length; i++)
+                {
+                    let date_form
+                    let date = datas[i].dateId.toString().slice(4,8)
+                    if(date.slice(0,1)==0){
+                        date_form = date.slice(1,2) + '.' + date.slice(2,4)
+                    }else{
+                        date_form = date.slice(0,2) + '.' + date.slice(2,4)
+                    }
+                    // console.log(date_form)
+                    this.dateId.push(date_form)
+                    this.currentConfirmedCount.push(datas[i].currentConfirmedCount)
+                    this.recentData.push(datas[i])
+                }
+                // console.log(this.recentData);
+                this.$nextTick(()=>{
+                    echarts.pro('province_recent',provinceShortName,this.dateId,this.currentConfirmedCount)
+                })
+            })
         }
     },
 }
