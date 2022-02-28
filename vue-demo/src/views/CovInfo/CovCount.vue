@@ -101,9 +101,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.statistics {
-    // margin-top: 1rem;
-}
+// .statistics {
+//     // margin-top: 1rem;
+// }
 .title{
     font-size: 1rem;
     color: #666;

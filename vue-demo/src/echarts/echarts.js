@@ -397,20 +397,18 @@ const chart = {
         myChart.setOption(option)
         // console.log(option);
     },
-    pro(id,title,xData,yData) {
+    province_recentData(id,title,dateId,confirmedIncr,curedIncr,deadIncr,currentConfirmedIncr) {
         // 基于准备好的dom，初始化echarts实例
         var main = document.getElementById(id)
         var myChart = echarts.init(main)
+        
         // 指定图表的配置项和数据
         var option = {
-            color: ["#3398DB"],
             title: {
                 text: title,
-                left: 'center',
                 textStyle: {
                     color: '#333',
-                    fontStyle: 'italic',
-                    fontSize: 10,
+                    fontSize: 15,
                     fontWeight: 'normal'
                 }
             },
@@ -418,9 +416,21 @@ const chart = {
                 show: true,
                 trigger: 'axis',
             },
+            // 坐标轴
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            legend: {
+                data: ['新增确诊', '新增治愈', '新增死亡', '现存确诊增加']
+            },
             xAxis: {
                 type: 'category',
-                data: xData,
+                data: dateId,
+                // 坐标轴留白
+                boundaryGap: false,
                 axisTick: {
                     show: false
                 },
@@ -428,43 +438,44 @@ const chart = {
                 axisLabel: {
                     color: '#999',
                     interval: 0,
+                    fontSize: 8,
+                    fontStyle: 'italic'
                 },
                 axisLine: {
                     show: false
                 },
-                // // x坐标轴指示器
-                // axisPointer: {
-                //     show: true,
-                //     type: 'line',
-                //     label: {
-                //         show: true,
-                //         formatter: '日期: {value}'
-                //     }
-                // }
             },
             yAxis: {
                 type: 'value',
-                axisTick: {
-                    show: false
-                },
-                axisLabel: {
-                    color: '#999',
-                    interval: 0,
-                },
-                axisLine: {
-                    show: false
-                }
             },
             series: [
                 {
+                    name: '新增确诊',
                     type: 'line',
-                    // 标签
-                    label: {
-                        show: false,
-                        formatter: '现存确诊: {b}',
-                        fontSize: 10,
-                    },
-                    data: yData,
+                    smooth: true,
+                    
+                    data: confirmedIncr,
+                },
+                {
+                    name: '新增治愈',
+                    type: 'line',
+                    smooth: true,
+                
+                    data: curedIncr,
+                },
+                {
+                    name: '新增死亡',
+                    type: 'line',
+                    smooth: true,
+                    
+                    data: deadIncr,
+                },
+                {
+                    name: '现存确诊增加',
+                    type: 'line',
+                    smooth: true,
+                
+                    data: currentConfirmedIncr,
                 },
             ],
         }

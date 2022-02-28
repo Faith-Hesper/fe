@@ -30,10 +30,16 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
     provinceShortName 辽宁
     getAreaStat 省份数据
         confirmedCount 累积确诊
-        deadCount 累积死亡
-        curedCount 治愈
+        confirmedIncr 新增确诊
         currentConfirmedCount 现存确诊
+        currentConfirmedIncr 现存确诊增加
+        deadCount 累积死亡
+        deadIncr 新增死亡
+        curedCount 治愈
+        curedIncr 新增治愈
         suspectedCount
+        highDangerCount 高风险地区
+        midDangerCount 中风险地区
     getListByCountryTypeService2true 世界数据
     fetchRecentStatV2 近期疫情分布 | 高中风险地区
         yesterdayLocalConfirmedCount 昨日本土新增

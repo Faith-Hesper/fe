@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div id="province" style="width: 100%; height: 50rem"></div>
-        <div id="province_recent" style="width: 100%; height: 50rem"></div>
+        <div id="province" style="width: 100%; height: 50rem; text-align:left;"></div>
+        <div id="province_recent" style="width: 100%; height: 50rem; text-align:left;"></div>
     </div>
 </template>
 
@@ -18,6 +18,25 @@ export default {
             confirmed: [],
             now_confirm: []
         }
+    },
+    created() {
+        let recentData = JSON.parse(localStorage.recentData)
+        let dateId = JSON.parse(localStorage.dateId)
+        let confirmedIncr = []
+        let  curedIncr = []
+        let  deadIncr = []
+        let  currentConfirmedIncr = []
+        // console.log(recentData);
+        recentData.forEach(item => {
+            confirmedIncr.push(item.confirmedIncr)
+            curedIncr.push(item.curedIncr)
+            deadIncr.push(item.deadIncr)
+            currentConfirmedIncr.push(item.currentConfirmedIncr)
+        });
+        this.$nextTick(()=>{
+
+            echarts.province_recentData('province_recent',this.cityName,dateId,confirmedIncr,curedIncr,deadIncr,currentConfirmedIncr)
+        })
     },
     mounted() {
         api.getData().then((res)=> {
@@ -38,12 +57,10 @@ export default {
                     this.now_confirm.push(now_confirm_list)
                 }
             });
-            
             // console.log(this.confirmed);
             // console.log(this.now_confirm);
             this.$nextTick(()=>{
                 echarts.province_chart('province',this.cityName,this.times,this.confirmed)
-
             })
         })
     },

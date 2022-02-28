@@ -15,30 +15,23 @@
                 </thead>
                 <!-- <van-icon name="arrow-down" /> -->
                 <tbody>
-                <tr v-for="item in riskArea" :key="item.locationId" style="text-align: left;">
-                    <td style="background-color:#00bec9;"><div class="bt" @click="listClick(item.cities,$event)"> <img src="../../assets/img/index.png" style="width: 0.8rem; margin-right: 5px">{{item.provinceShortName}}</div></td>
-                    <td>{{ item.yesterdayLocalConfirmedCount }}</td>
+                <tr v-for="(item, index) in riskArea"  :key="index" style="text-align: left;">
+                    <td style="background-color:#00bec9;"><div class="bt" @click="listClick(item.cities,index,$event)"> <img src="../../assets/img/index.png" style="width: 0.8rem; margin-right: 5px">{{ item | cityName}}</div></td>
+                    <td>{{ item.yesterdayLocalConfirmedCount | data_announced}}</td>
                     <td>{{ item.currentConfirmedCount }}</td>
                     <td>{{ item.currentDangerCount }}</td>
-                    <td><a @click="detail(item.provinceShortName,item.statisticsData)" :href='"#/province/"+item.provinceShortName'>详情</a></td>
+                    <td @click="detail(item.provinceShortName,item.statisticsData)"><a  :href='"#/province/"+item.provinceShortName'>详情</a></td>
                 </tr>
-                <!-- <tr v-for="item in riskArea[0]" :key="item.locationId">
-                    <td><div class="bt" @click="listClick">{{item.provinceShortName}}</td>
-                    <td>{{ item.yesterdayLocalConfirmedCount }}</td>
-                    <td>{{ item.currentConfirmedCount }}</td>
-                    <td>{{ item.currentDangerCount }}</td>
-                    <td>详情</td>
-                </tr> -->
                 </tbody>
             </table>
         </div>
         <div class="china">
         <van-tabs v-model="active" type="card" color="#00bec7" sticky animated swipeable @change="onClickTab">
             <van-tab title="现存确诊">
-                <div id="main2" style="width: 100%; height: 25rem"></div>
+                <div id="main2" style="width: 100%; height: 25rem; text-align:left; padding: auto;"></div>
             </van-tab>
             <van-tab title="累积确诊">
-                <div id="main" style="width: 100%; height: 25rem"></div>
+                <div id="main" style="width: 100%; height: 25rem; text-align:left;"></div>
             </van-tab>
         </van-tabs>
         </div>
@@ -55,6 +48,7 @@
 <script>
 import api from '../../api/base.js'
 import echarts from '../../echarts/echarts.js'
+import '../../utils/css_transition'
 
 export default {
     data() {
@@ -69,9 +63,6 @@ export default {
             active: 0,
             actives: 0,
             dataStatistic: -1,
-            recentData: [],
-            dateId: [],
-            currentConfirmedCount: [],
         }
     },
     created() {
@@ -121,6 +112,10 @@ export default {
             let { data: dom } = res
             // 解析丁香园dom得到数据
             this.riskArea =  JSON.parse(dom.getElementById('fetchRecentStatV2').text.split('=')[1].slice(0,-11))
+            this.riskArea =  this.riskArea.map((item,index)=>{
+                item.id = index
+                return item
+            })
             console.log(this.riskArea);
         })
         },
@@ -137,15 +132,27 @@ export default {
         })}
         console.log(this.active); 
         },
-        listClick(cityes,event) {
-            console.log(cityes,event);
+        // 动态列表
+        listClick(cityes,id,event) {
+            
+            // console.log(cityes);
+            cityes.forEach(item=>{
+                // 从索引 i 开始 删除 0个元素,在i的位置添加值item
+                this.riskArea.splice(id+1,0,item)
+            })
+            // console.log(this.riskArea);
+            // console.log(this.$refs[id]);
+            console.log(event);
         },
         detail(provinceShortName,province_json) {
-            console.log(province_json);
+            // console.log(province_json);
             api.province_recent(province_json).then((res)=>{
                 const { data:{ data:datas } } = res
+                // console.log(datas);
+                let dateId,currentConfirmedCount,recentData
                 for(let i=datas.length-18; i < datas.length; i++)
                 {
+                    // 格式化日期
                     let date_form
                     let date = datas[i].dateId.toString().slice(4,8)
                     if(date.slice(0,1)==0){
@@ -154,17 +161,35 @@ export default {
                         date_form = date.slice(0,2) + '.' + date.slice(2,4)
                     }
                     // console.log(date_form)
-                    this.dateId.push(date_form)
-                    this.currentConfirmedCount.push(datas[i].currentConfirmedCount)
-                    this.recentData.push(datas[i])
+                    dateId.push(date_form)
+                    // 最近18天现存确诊
+                    currentConfirmedCount.push(datas[i].currentConfirmedCount)
+                    // 获取最近18天数据
+                    recentData.push(datas[i])
                 }
-                // console.log(this.recentData);
-                this.$nextTick(()=>{
-                    echarts.pro('province_recent',provinceShortName,this.dateId,this.currentConfirmedCount)
-                })
+                localStorage.recentData = JSON.stringify(recentData)
+                localStorage.dateId = JSON.stringify(dateId)
+                console.log(recentData);
+                // this.$nextTick(()=>{
+                //     echarts.pro('province_recent',provinceShortName,this.dateId,this.currentConfirmedCount)
+                // })
             })
         }
     },
+    // 局部过滤器
+    filters: {
+        // 昨日本土新增
+        data_announced: (val)=>{
+            return val>0?val:'待公布'
+        },
+        // 判断城市名字
+        cityName: (val)=>{
+            if(!val.cityName){
+                return val.provinceShortName
+            }
+            return val.cityName
+        }
+    }
 }
 </script>
 

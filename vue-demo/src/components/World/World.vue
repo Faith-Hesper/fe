@@ -2,10 +2,10 @@
     <div class="world">
         <van-tabs v-model="active" type="card" color="#00bec7" sticky animated swipeable @change="change">
             <van-tab title="现存确诊">
-                <div id="main4" style="width: 100%; height: 25rem"></div>
+                <div id="main4" style="width: 100%; height: 25rem; text-align:left;"></div>
             </van-tab>
             <van-tab title="累积确诊">
-                <div id="main3" style="width: 100%; height: 25rem"></div>
+                <div id="main3" style="width: 100%; height: 25rem; text-align:left;"></div>
             </van-tab>
         </van-tabs>
     </div>
