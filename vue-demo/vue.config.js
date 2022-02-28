@@ -49,15 +49,6 @@ module.exports = {
                 pathRewrite: {
                     '^/juhe': 'https://apis.juhe.cn'
                 }
-            },
-            '/qq': {
-                target: 'https://docs.qq.com',
-                ws: true,
-                changeOrigin: true,
-                secure: true,
-                pathRewrite: {
-                    '^/qq': 'https://docs.qq.com'
-                }
             }
         },
     }
