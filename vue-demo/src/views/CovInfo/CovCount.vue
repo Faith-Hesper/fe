@@ -56,7 +56,7 @@ export default {
     created() {
         this.list_content = [{
             name: '现存确诊',
-            num: '',
+            num: this.covNumChange.currentConfirmedCount,
             add: '较昨日'
         },
         {

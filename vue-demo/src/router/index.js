@@ -1,6 +1,7 @@
 import Vue from "vue"
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import APP from '../App.vue'
 import CovInfo from '../views/CovInfo/CovInfo.vue'
 import Province from '../components/Province/Province.vue'
 import covDetection from '../components/covDetection/covDetection.vue'
@@ -11,7 +12,12 @@ Vue.use(VueRouter)
 const routes = [
     {
         path: '/',
-        name: 'Home',
+        redirect: '/home',
+        component: APP
+    },
+    {
+        path: '/home',
+        name: '首页',
         component: Home
     },
     {
@@ -21,10 +27,10 @@ const routes = [
     },
     {
         path: '/covDetection',
-        name: 'covDetection',
+        name: '核酸检测',
         component: covDetection
     },
-    // 动态绑定路由
+    // 动态绑定路由 props 组件传参
     {
         path: '/province/:cityName',
         name: 'Province',

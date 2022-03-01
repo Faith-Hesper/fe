@@ -116,7 +116,7 @@ export default {
                 item.id = index
                 return item
             })
-            console.log(this.riskArea);
+            // console.log(this.riskArea);
         })
         },
         // 调用累积确诊

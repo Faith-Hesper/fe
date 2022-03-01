@@ -1,23 +1,19 @@
 <template>
     <div id="app">
+        <!--使用 router-link 组件进行导航 -->
         <!-- <Home></Home> -->
+        <!-- 路由出口 -->
+        <!-- 路由匹配到的组件将渲染在这里 -->
         <router-view></router-view>
-        <!-- <Header title="购物车"></Header> -->
-        <!-- <input type="text" name="" id="" :placeholder="text"> -->
-        <!-- <Content v-for="item in text" :key="item.id" :title="item.title" :content="item.description" :pic="item.picUrl"></Content> -->
     </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-// import Header from './components/Header/Header.vue'
-// import Content from './components/container/Content.vue'
 import Home from './views/Home.vue'
-
 export default {
     name: 'App',
     components: {
-        // Home
+        Home
     },
     data() {
         return {
@@ -33,12 +29,6 @@ export default {
 }
 </script>
 
-<style scoped lang="less">
-#app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-}
+<style>
+
 </style>

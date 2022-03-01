@@ -49,6 +49,15 @@ module.exports = {
                 pathRewrite: {
                     '^/juhe': 'https://apis.juhe.cn'
                 }
+            },
+            '/bili': {
+                target: 'https://api.bilibili.com',
+                ws: true,
+                changeOrigin: true,
+                secure: true,
+                pathRewrite: {
+                    '^/bili': 'https://api.bilibili.com'
+                }
             }
         },
     }
