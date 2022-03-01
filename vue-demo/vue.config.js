@@ -10,6 +10,15 @@ module.exports = {
     assetsDir: 'static',//放置生成的静态资源 (js、css、img、fonts) 的目录
     indexPath: "index.html",
     productionSourceMap: false,//生产环境是否生成 sourceMap 文件
+    configureWebpack: config => {
+        if (process.env.NODE_ENV === 'production') {
+            config.mode = 'production';
+            config["performance"] = {
+                "maxEntrypointSize": 10000000,
+                "maxAssetSize": 30000000
+            }
+        }
+    },
     devServer: {
         proxy: {
             // 以/interface代替/interface.sina.cn,将所有https://interface.sina.cn请求重写为https:/interface
@@ -50,15 +59,15 @@ module.exports = {
                     '^/juhe': 'https://apis.juhe.cn'
                 }
             },
-            '/bili': {
-                target: 'https://api.bilibili.com',
-                ws: true,
-                changeOrigin: true,
-                secure: true,
-                pathRewrite: {
-                    '^/bili': 'https://api.bilibili.com'
-                }
-            }
+            // '/bili': {
+            //     target: 'https://api.bilibili.com',
+            //     ws: true,
+            //     changeOrigin: true,
+            //     secure: true,
+            //     pathRewrite: {
+            //         '^/bili': 'https://api.bilibili.com'
+            //     }
+            // }
         },
     }
 }

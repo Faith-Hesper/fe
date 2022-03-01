@@ -13,7 +13,7 @@
                 <a :href="item.sourceUrl" target="_blank">{{ item.title }}</a>
             </div>
         </div>
-        <div class="tool">
+        <!-- <div class="tool">
             <div class="title">B站视频下载</div>
             <label for="mid">mid号: </label>
             <input v-model="mid" type="text" class="form-control" id="mid" placeholder="596324576">
@@ -48,7 +48,7 @@
             <button @click="submit_bvid(bvid)" type="button" class="btn btn-primary">下载视频</button>
             </form>
             <p>B站视频下载链接:{{ downloadUrldurl }}</p>
-        </div>
+        </div> -->
         <div class="list">
             <router-link to="/">
                 <img src="../assets/img/2.png" alt="" />
@@ -141,31 +141,31 @@ export default {
     },
     methods: {
         // B站视频下载  index.html 添加<meta name="referrer" content="never">
-        submit_bvid(bvid) {
-            console.log(bvid);
-            api.get_aid(bvid).then((res)=>{
-                // console.log(res);
-                const { data:{data: { aid }} } = res
-                // console.log(aid);
-                api.get_cid(aid).then((res)=>{
-                    const { data:{data: { cid }} } = res
-                    // console.log(cid);
-                    api.bili_downloadUrl(aid,cid).then((res)=>{
-                        const { data:{data: { durl }} } = res
-                        this.downloadUrldurl = durl[0].url
-                        console.log(this.downloadUrldurl);
-                        window.open(this.downloadUrldurl)
-                    }).catch(err=> console.log(err))
-                }).catch(err=> console.log(err))
-            }).catch(err=> console.log(err))
-        },
-        getvideoList(mid) {
-            api.getvideoList(mid).then(res=>{
-                console.log(res);
-                const { data:{data} } = res
-                this.vlist = data.list.vlist
-            }).catch(err=> console.log(err))
-        }
+        // submit_bvid(bvid) {
+        //     console.log(bvid);
+        //     api.get_aid(bvid).then((res)=>{
+        //         // console.log(res);
+        //         const { data:{data: { aid }} } = res
+        //         // console.log(aid);
+        //         api.get_cid(aid).then((res)=>{
+        //             const { data:{data: { cid }} } = res
+        //             // console.log(cid);
+        //             api.bili_downloadUrl(aid,cid).then((res)=>{
+        //                 const { data:{data: { durl }} } = res
+        //                 this.downloadUrldurl = durl[0].url
+        //                 console.log(this.downloadUrldurl);
+        //                 window.open(this.downloadUrldurl)
+        //             }).catch(err=> console.log(err))
+        //         }).catch(err=> console.log(err))
+        //     }).catch(err=> console.log(err))
+        // },
+        // getvideoList(mid) {
+        //     api.getvideoList(mid).then(res=>{
+        //         console.log(res);
+        //         const { data:{data} } = res
+        //         this.vlist = data.list.vlist
+        //     }).catch(err=> console.log(err))
+        // }
     },
 }
 </script>
