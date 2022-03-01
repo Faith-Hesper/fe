@@ -1,7 +1,6 @@
 import Vue from "vue"
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import APP from '../App.vue'
 import CovInfo from '../views/CovInfo/CovInfo.vue'
 import Province from '../components/Province/Province.vue'
 import covDetection from '../components/covDetection/covDetection.vue'
@@ -12,11 +11,6 @@ Vue.use(VueRouter)
 const routes = [
     {
         path: '/',
-        redirect: '/home',
-        component: APP
-    },
-    {
-        path: '/home',
         name: '首页',
         component: Home
     },
