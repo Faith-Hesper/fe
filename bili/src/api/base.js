@@ -1,8 +1,8 @@
 import axios from 'axios'
-
+axios.defaults.withCredentials = true
 const api = {
-    getvideoList(mid) {
-        return axios.get(`/bili/x/space/arc/search?mid=${mid}&ps=30&tid=0&pn=1&keyword=&order=pubdate&jsonp=jsonp`)
+    getvideoList(mid,ps=30,pn=1) {
+        return axios.get(`/bili/x/space/arc/search?mid=${mid}&ps=${ps}&tid=0&pn=${pn}&keyword=&order=pubdate&jsonp=jsonp`)
     },
     get_aid(bvid) {
         return axios.get(`/bili/x/web-interface/archive/stat?bvid=${bvid}`)

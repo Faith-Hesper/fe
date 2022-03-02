@@ -10,6 +10,8 @@
                         <td>作者</td>
                         <td>标题</td>
                         <td>BV号</td>
+                        <td>发布时间</td>
+                        <td>时长</td>
                         <td>评论</td>
                         <td>播放量</td>
                         <td>图片</td>
@@ -20,6 +22,8 @@
                         <td>{{ item.author }}</td>
                         <td>{{ item.title }}</td>
                         <td>{{ item.bvid }}</td>
+                        <td>{{ item.created | time }}</td>
+                        <td>{{ item.length }}</td>
                         <td>{{ item.comment }}</td>
                         <td>{{ item.play }}</td>
                         <td style="width:10rem"><img :src="item.pic" :alt="item.title" width="100rem" class="img-rounded"></td>
@@ -81,23 +85,21 @@ export default {
             }).catch(err=> console.log(err))
         }
   },
+  filters: {
+    time: val => {
+      val += '000'
+      // console.log(val);
+      val = parseInt(val)
+      let t = new Date(val).toLocaleString()
+      return t
+    }
+  }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+.title,label {
+  text-align: left;
 }
 </style>
