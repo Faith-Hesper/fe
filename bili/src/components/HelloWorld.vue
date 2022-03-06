@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import api from '../api/base.js'
+import api,{ bili_download } from '../api/base.js'
 import VideoForm from './UpInform/VideoForm.vue'
 
 export default {
@@ -45,29 +45,11 @@ export default {
         // B站视频下载  index.html 添加<meta name="referrer" content="never">
         submit_bvid(bvid) {
             console.log(bvid)
-            api.get_aid(bvid)
-                .then((res) => {
-                    // console.log(res);
-                    const { data: { data: { aid }, }, } = res
-                    // console.log(aid);
-                    return aid
-                })
-                .catch((err) => console.log(err))
-                .then((aid)=>{
-                    api.get_cid(aid).then((res)=>{
-                        const { data: { data: { cid }, }, } = res
-                        return cid
-                    })
-                    .catch((err) => console.log(err))
-                    .then(cid=>{
-                        api.bili_downloadUrl(aid, cid).then(res=>{
-                            const { data: { data: { durl }, }, } = res
-                            this.downloadUrldurl = durl[0].url
-                            console.log(this.downloadUrldurl)
-                            window.open(this.downloadUrldurl)
-                        })
-                    })
-                })
+            bili_download(bvid).then(res=>{
+                this.downloadUrldurl = res[0].url
+                console.log(this.downloadUrldurl)
+                window.open(this.downloadUrldurl)
+            }).catch(err=>console.log(err))
         },
     },
 }
@@ -81,25 +63,3 @@ label {
 }
 </style>
 
-// api.get_cid(aid)
-//                         .then((res) => {
-//                             const {
-//                                 data: {
-//                                     data: { cid },
-//                                 },
-//                             } = res
-//                             // console.log(cid);
-//                             api.bili_downloadUrl(aid, cid)
-//                                 .then((res) => {
-//                                     const {
-//                                         data: {
-//                                             data: { durl },
-//                                         },
-//                                     } = res
-//                                     this.downloadUrldurl = durl[0].url
-//                                     console.log(this.downloadUrldurl)
-//                                     window.open(this.downloadUrldurl)
-//                                 })
-//                                 .catch((err) => console.log(err))
-//                         })
-//                         .catch((err) => console.log(err))
