@@ -31,7 +31,7 @@ const api = {
     up_video_num(mid) {
         return axios.get(`/bili/x/relation/upstat?mid=${mid}&jsonp=jsonp`)
     },
-    getvideoList(mid,ps=30,pn=1) {
+    getvideoList(mid,ps='30',pn='1') {
         return axios.get(`/bili/x/space/arc/search?mid=${mid}&ps=${ps}&tid=0&pn=${pn}&keyword=&order=pubdate&jsonp=jsonp`)
     },
 }
