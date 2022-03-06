@@ -1,6 +1,7 @@
 <template>
     <div class="tool">
         <div class="title">B站视频下载</div>
+        <!-- <component :is=""></component> -->
         <VideoForm />
         <form class="form-inline">
             <div class="form-group">
@@ -47,36 +48,26 @@ export default {
             api.get_aid(bvid)
                 .then((res) => {
                     // console.log(res);
-                    const {
-                        data: {
-                            data: { aid },
-                        },
-                    } = res
+                    const { data: { data: { aid }, }, } = res
                     // console.log(aid);
-                    api.get_cid(aid)
-                        .then((res) => {
-                            const {
-                                data: {
-                                    data: { cid },
-                                },
-                            } = res
-                            // console.log(cid);
-                            api.bili_downloadUrl(aid, cid)
-                                .then((res) => {
-                                    const {
-                                        data: {
-                                            data: { durl },
-                                        },
-                                    } = res
-                                    this.downloadUrldurl = durl[0].url
-                                    console.log(this.downloadUrldurl)
-                                    window.open(this.downloadUrldurl)
-                                })
-                                .catch((err) => console.log(err))
-                        })
-                        .catch((err) => console.log(err))
+                    return aid
                 })
                 .catch((err) => console.log(err))
+                .then((aid)=>{
+                    api.get_cid(aid).then((res)=>{
+                        const { data: { data: { cid }, }, } = res
+                        return cid
+                    })
+                    .catch((err) => console.log(err))
+                    .then(cid=>{
+                        api.bili_downloadUrl(aid, cid).then(res=>{
+                            const { data: { data: { durl }, }, } = res
+                            this.downloadUrldurl = durl[0].url
+                            console.log(this.downloadUrldurl)
+                            window.open(this.downloadUrldurl)
+                        })
+                    })
+                })
         },
     },
 }
@@ -89,3 +80,26 @@ label {
     text-align: left;
 }
 </style>
+
+// api.get_cid(aid)
+//                         .then((res) => {
+//                             const {
+//                                 data: {
+//                                     data: { cid },
+//                                 },
+//                             } = res
+//                             // console.log(cid);
+//                             api.bili_downloadUrl(aid, cid)
+//                                 .then((res) => {
+//                                     const {
+//                                         data: {
+//                                             data: { durl },
+//                                         },
+//                                     } = res
+//                                     this.downloadUrldurl = durl[0].url
+//                                     console.log(this.downloadUrldurl)
+//                                     window.open(this.downloadUrldurl)
+//                                 })
+//                                 .catch((err) => console.log(err))
+//                         })
+//                         .catch((err) => console.log(err))
