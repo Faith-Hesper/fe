@@ -15,7 +15,7 @@
                 <!-- <van-icon name="arrow-down" /> -->
                 <tbody>
                 <tr v-for="(item, index) in riskArea"  :key="index" style="text-align: left;">
-                    <td style="background-color:#00bec9;"><div class="bt" @click="listClick(item.cities,index,$event)"> <img src="../../assets/img/index.png" style="width: 0.8rem; margin-right: 5px">{{ item | cityName}}</div></td>
+                    <td style="background-color:#00bec9;"><div class="bt" @click="listClick(item.cities,index,$event)"> <img src="../../assets/img/index.png" style="width: 0.8rem; margin-right: 5px">{{ item | cityName }}</div></td>
                     <td>{{ item.yesterdayLocalConfirmedCount | data_announced}}</td>
                     <td>{{ item.currentConfirmedCount }}</td>
                     <td>{{ item.currentDangerCount }}</td>
@@ -143,6 +143,7 @@ export default {
         },
         detail(provinceShortName,province_json) {
             // console.log(province_json);
+            // 省份疫情以来确诊信息
             api.province_recent(province_json).then((res)=>{
                 const { data:{ data:datas } } = res
                 // console.log(datas);

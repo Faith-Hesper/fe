@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import api from '../../api/base.js'
+import { getCovInfo } from '../../api/base.js'
 // import bus from '../../eventBus.js'
 
 export default {
@@ -34,29 +34,20 @@ export default {
         //     // console.log(val);
         //     console.log(this.cov);
         // })
-        api.getCovInfo().then((res) => {
-            const { data: response } = res
-            console.log(response)
-            let data = response.newslist[0]
-            this.covDesc = {
-                note1: data.desc.note1,
-                note2: data.desc.note2,
-                note3: data.desc.note3,
-                remark1: data.desc.remark1,
-                remark2: data.desc.remark2,
-                remark3: data.desc.remark3,
-            }
+        getCovInfo().then((res) => {
+            this.covDesc = res.covDesc
         })
     },
     mounted() {
         // console.log('mo',this.cov);
+        
     }
 }
 </script>
 
 <style lang="less" scoped>
 .CovInfo {
-    padding: 0.2rem;
+    padding: 0.3rem;
     text-align: left;
     margin-bottom: 0.2rem;
     .title {
@@ -65,7 +56,7 @@ export default {
     }
     p {
         font-size: 0.8rem;
-        line-height: 1rem;
+        line-height: 2rem;
         color: gray;
     }
 }

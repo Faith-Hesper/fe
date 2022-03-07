@@ -39,11 +39,11 @@ export default {
         })
     },
     mounted() {
+        console.log(this.cityName);
         api.getData().then((res)=> {
             const {data: {data: {list,times}}} = res
             this.times =  times + '现有确诊病例数，排除治愈、死亡' 
             // console.log(list);
-            let provinceName 
             const { city } = list.find((item,index)=>{return item.name==this.cityName})
             // console.log(city);
             city.forEach((item,index) => {

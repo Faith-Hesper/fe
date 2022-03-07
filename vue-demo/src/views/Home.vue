@@ -43,7 +43,7 @@
 import CovCount from './CovInfo/CovCount.vue'
 import World from '../components/World/World.vue'
 import China from '../components/China/China.vue'
-import api from '../api/base.js'
+import { getCovInfo } from '../api/base.js'
 // import bus from '../eventBus.js'
 
 export default {
@@ -61,46 +61,21 @@ export default {
         World
     },
     created() {
-        api.getCovInfo().then((res) => {
-            const { data: response } = res
-            // console.log(response)
-            let data = response.newslist[0]
-            // 确诊信息
-            this.covNumChange = {
-                modifytime: data.desc.modifyTime,
-                currentConfirmedIncr: data.desc.currentConfirmedIncr,
-                currentConfirmedCount: data.desc.currentConfirmedCount,
-                suspectedIncr: data.desc.suspectedIncr,
-                suspectedCount: data.desc.suspectedCount,
-                seriousIncr: data.desc.seriousIncr,
-                seriousCount: data.desc.seriousCount,
-                confirmedIncr: data.desc.confirmedIncr,
-                confirmedCount: data.desc.confirmedCount,
-                deadIncr: data.desc.deadIncr,
-                deadCount: data.desc.deadCount,
-                curedIncr: data.desc.curedIncr,
-                curedCount: data.desc.curedCount,
-            }
-            // 疫情热点
-            this.covDesc = {
-                note1: data.desc.note1,
-                note2: data.desc.note2,
-                note3: data.desc.note3,
-                remark1: data.desc.remark1,
-                remark2: data.desc.remark2,
-                remark3: data.desc.remark3,
-            }
-            data.news.forEach((key) => {
-                this.news.push(key)
-            })
-        })
+        this.loadCovData()
         
     },
     mounted() {
 
     },
     methods: {
-        
+        async loadCovData()
+        {
+            await getCovInfo().then((res) => {
+            this.covDesc = res.covDesc
+            this.covNumChange = res.covNumChange
+            this.news = res.news
+            })
+        }
     },
 }
 </script>

@@ -22,6 +22,7 @@ const base = {
     juhekey: '?key=b41e206fa99981c23b6c876ea97f7553'
 }
 
+// 丁香园
 async function dxyData() {
     const riskArea = await axios.get(base.dxy + base.dxyData, {
         // 设置返回类型为HTML
@@ -40,10 +41,53 @@ async function dxyData() {
     return riskArea
 }
 
+// 病毒新增等信息
+async function getCovInfo() {
+    const covInfo = await axios.get(base.host + base.covInfo).then(res => {
+        const { data: response } = res
+        // console.log(response)
+        let data = response.newslist[0]
+        // 确诊信息
+        let covNumChange = {
+            modifytime: data.desc.modifyTime,
+            currentConfirmedIncr: data.desc.currentConfirmedIncr,
+            currentConfirmedCount: data.desc.currentConfirmedCount,
+            suspectedIncr: data.desc.suspectedIncr,
+            suspectedCount: data.desc.suspectedCount,
+            seriousIncr: data.desc.seriousIncr,
+            seriousCount: data.desc.seriousCount,
+            confirmedIncr: data.desc.confirmedIncr,
+            confirmedCount: data.desc.confirmedCount,
+            deadIncr: data.desc.deadIncr,
+            deadCount: data.desc.deadCount,
+            curedIncr: data.desc.curedIncr,
+            curedCount: data.desc.curedCount,
+        }
+        // 疫情热点
+        let covDesc = {
+            note1: data.desc.note1,
+            note2: data.desc.note2,
+            note3: data.desc.note3,
+            remark1: data.desc.remark1,
+            remark2: data.desc.remark2,
+            remark3: data.desc.remark3,
+        }
+        let news= []
+        data.news.forEach((key) => {
+            news.push(key)
+        })
+        let covInfo = {
+            covNumChange,
+            covDesc,
+            news
+        }
+        return covInfo
+    }).catch(err => console.log(err))
+    return covInfo
+}
+
 const api = {
-    getCovInfo(){
-        return axios.get(base.host+base.covInfo)
-    },
+
     getData() {
         return axios({
             url: '/interface/'+base.provinceData,
@@ -69,5 +113,5 @@ const api = {
 
 }
 
-export { dxyData }
+export { dxyData, getCovInfo }
 export default api
