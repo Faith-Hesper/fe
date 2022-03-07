@@ -1,6 +1,5 @@
 <template>
     <div class="china">
-        <div class="china">
         <div class="china">近期疫情分布</div>
             <table class="table table-striped table-hover" style="text-align: left;">
                 <!-- 表头 -->
@@ -20,11 +19,10 @@
                     <td>{{ item.yesterdayLocalConfirmedCount | data_announced}}</td>
                     <td>{{ item.currentConfirmedCount }}</td>
                     <td>{{ item.currentDangerCount }}</td>
-                    <td @click="detail(item.provinceShortName,item.statisticsData)"><a  :href='"#/province/"+item.provinceShortName'>详情</a></td>
+                    <td @click.once="detail(item.provinceShortName,item.statisticsData)"><a  :href='"#/province/"+item.provinceShortName'>详情</a></td>
                 </tr>
                 </tbody>
             </table>
-        </div>
         <div class="china">
         <van-tabs v-model="active" type="card" color="#00bec7" sticky animated swipeable @change="onClickTab">
             <van-tab title="现存确诊">
@@ -36,19 +34,22 @@
         </van-tabs>
         </div>
         <div class="china">
+            <!-- <MapVessel type="card" color="#00bec7" title="境外输入省级Top10" id="jwsrTop" style="width: 100%; height: 25rem"></MapVessel> -->
         <van-tabs v-model="actives" type="card" color="#00bec7" sticky animated swipeable>
             <van-tab title="境外输入省级Top10">
                 <div id="jwsrTop" style="width: 100%; height: 25rem"></div>
             </van-tab>
         </van-tabs>
+
         </div>
     </div>
 </template>
 
 <script>
-import api from '../../api/base.js'
+import api,{ dxyData } from '../../api/base.js'
 import echarts from '../../echarts/echarts.js'
 import '../../utils/css_transition'
+// import MapVessel from '../Common/MapVessel.vue'
 
 export default {
     data() {
@@ -64,6 +65,9 @@ export default {
             actives: 0,
             dataStatistic: -1,
         }
+    },
+    components: {
+        // MapVessel
     },
     created() {
         this.getRiskAreaData()
@@ -107,25 +111,18 @@ export default {
         })
         },
         // 风险地区数据
-        getRiskAreaData() {
-            this.riskArea = api.getDxy().then(res=>{
-            let { data: dom } = res
-            // 解析丁香园dom得到数据
-            this.riskArea =  JSON.parse(dom.getElementById('fetchRecentStatV2').text.split('=')[1].slice(0,-11))
-            this.riskArea =  this.riskArea.map((item,index)=>{
-                item.id = index
-                return item
-            })
-            // console.log(this.riskArea);
-        })
+        async getRiskAreaData() {
+            this.riskArea = await dxyData().then(res=>{
+                return res} )
+            console.log(this.riskArea);
         },
         // 调用累积确诊
-        onClickTab(title) {
+        onClickTab(index) {
         // this.active = 1
         /** vant库组件在mounted前未渲染组件内DOM
           * 用change事件手动触发echarts图表渲染
           * $nextTick 延迟调用函数*/
-        if(title==1){
+        if(index==1){
             this.$nextTick(()=>{
             echarts.chart('main',this.times,this.confirmed)
             // console.log(title); 
@@ -134,7 +131,7 @@ export default {
         },
         // 动态列表
         listClick(cityes,id,event) {
-            
+
             // console.log(cityes);
             cityes.forEach(item=>{
                 // 从索引 i 开始 删除 0个元素,在i的位置添加值item
@@ -142,7 +139,7 @@ export default {
             })
             // console.log(this.riskArea);
             // console.log(this.$refs[id]);
-            console.log(event);
+            console.log(event.style);
         },
         detail(provinceShortName,province_json) {
             // console.log(province_json);

@@ -22,12 +22,22 @@ const base = {
     juhekey: '?key=b41e206fa99981c23b6c876ea97f7553'
 }
 
-const headers = {
-    // 'Content-Type':'application/x-www-form-urlencoded',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, DELETE, PUT',
-    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
-    'Access-Control-Allow-Credentials': 'true',
+async function dxyData() {
+    const riskArea = await axios.get(base.dxy + base.dxyData, {
+        // 设置返回类型为HTML
+        responseType: 'document'
+    }).then(res => {
+        let { data: dom } = res
+        // 解析丁香园dom得到数据
+        let riskArea = JSON.parse(dom.getElementById('fetchRecentStatV2').text.split('=')[1].slice(0, -11))
+        // 添加id
+        riskArea = riskArea.map((item, index) => {
+            item.id = index
+            return item
+        })
+        return riskArea
+    }).catch(err=>console.log(err))
+    return riskArea
 }
 
 const api = {
@@ -38,7 +48,6 @@ const api = {
         return axios({
             url: '/interface/'+base.provinceData,
             method: 'get',
-            headers: headers,
             responseType: 'json'
         })
     },
@@ -60,4 +69,5 @@ const api = {
 
 }
 
+export { dxyData }
 export default api

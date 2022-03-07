@@ -1,7 +1,7 @@
 <template>
     <div class="statistics">
         <div class="title">截止北京时间 {{ covNumChange.modifytime | time }}</div>
-        <van-row>
+        <van-row style="text-align: center;">
             <van-col span="8">
                 <span>现存确诊</span>
                 <div class="bold">{{ covNumChange.currentConfirmedCount }}</div>
@@ -18,7 +18,7 @@
                 <span v-if="covNumChange.seriousIncr" class="addrecent">较昨日{{ covNumChange.seriousIncr | symbol }}</span>
             </van-col>
         </van-row>
-        <van-row>
+        <van-row style="text-align: center;">
             <van-col span="8">
                 <span>累积确诊</span>
                 <div class="bold">{{ covNumChange.confirmedCount }}</div>
