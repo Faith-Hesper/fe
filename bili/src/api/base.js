@@ -21,6 +21,11 @@ async function bili_download(bvid) {
     return durl
 }
 
+async function gaode(pageNum) { 
+    const data = await axios.get(`/gaode/v3/place/text?key=5833fc2ab01735a6c6fd3a72d1b43459&keywords=应急&city=唐山市&page=${pageNum}`)
+    return data
+}
+
 const api = {
     up_personal_inform(mid) {
         return axios.get(`/bili/x/space/acc/info?mid=${mid}&jsonp=jsonp`)
@@ -35,5 +40,5 @@ const api = {
         return axios.get(`/bili/x/space/arc/search?mid=${mid}&ps=${ps}&tid=0&pn=${pn}&keyword=&order=pubdate&jsonp=jsonp`)
     },
 }
-export { bili_download }
+export { bili_download,gaode }
 export default api

@@ -26,10 +26,13 @@
         <div class="china">
         <van-tabs v-model="active" type="card" color="#00bec7" sticky animated swipeable @change="onClickTab">
             <van-tab title="现存确诊">
-                <div id="main2" style="width: 100%; height: 25rem; text-align:left; padding: auto;"></div>
+                <div id="main2" style="width: 100%; height: 30rem; text-align:left; padding: auto;"></div>
+            </van-tab>
+            <van-tab title="风险地区">
+                <div id="riskArea" style="width: 100%; height: 30rem; text-align:left; padding: auto;"></div>
             </van-tab>
             <van-tab title="累积确诊">
-                <div id="main" style="width: 100%; height: 25rem; text-align:left;"></div>
+                <div id="main" style="width: 100%; height: 30rem; text-align:left;"></div>
             </van-tab>
         </van-tabs>
         </div>
@@ -56,6 +59,7 @@ export default {
         return {
             confirmed: [],
             now_confirm: [],
+            currentDangerCount: [],
             jwsr_name: [],
             jwsr_value: [],
             riskArea: [],
@@ -81,7 +85,8 @@ export default {
         // 省份数据
         api.getData().then((res)=> {
             const {data: {data: {list,jwsrTop,times}}} = res
-            this.times =  times + '现有确诊病例数，排除治愈、死亡' 
+            this.times = times
+            let title =  times + '现有确诊病例数，排除治愈、死亡' 
             // console.log(res);
             // console.log(list);
             list.forEach((item,index)=>{
@@ -101,7 +106,7 @@ export default {
             // console.log(this.confirmed);
             // console.log(this.now_confirm);
             this.$nextTick(()=>{
-                echarts.chart('main2',this.times,this.now_confirm)
+                echarts.chart('main2',title,this.now_confirm)
             })
             this.$nextTick(()=>{
                 echarts.jwsrTop_chart('jwsrTop','境外输入Top10',this.jwsr_name,this.jwsr_value)
@@ -113,6 +118,10 @@ export default {
         // 风险地区数据
         async getRiskAreaData() {
             this.riskArea = await dxyData().then(res=>{
+                res.forEach(item=>{
+                    let areaData = {name: item.provinceShortName,value: item.currentDangerCount}
+                    this.currentDangerCount.push(areaData)
+                })
                 return res} )
             console.log(this.riskArea);
         },
@@ -122,11 +131,19 @@ export default {
         /** vant库组件在mounted前未渲染组件内DOM
           * 用change事件手动触发echarts图表渲染
           * $nextTick 延迟调用函数*/
-        if(index==1){
+        let time
+        if(index==2){
             this.$nextTick(()=>{
-            echarts.chart('main',this.times,this.confirmed)
+            time = this.times + '累积确诊病例数，排除治愈、死亡' 
+            echarts.chart('main',time,this.confirmed)
             // console.log(title); 
         })}
+        else if(index==1){
+            this.$nextTick(()=>{
+            time = this.times + '风险地区' 
+            echarts.riskArea('riskArea',time,this.currentDangerCount)
+            })
+        }
         console.log(this.active); 
         },
         // 动态列表

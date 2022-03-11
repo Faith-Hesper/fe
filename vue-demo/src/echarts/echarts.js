@@ -483,5 +483,120 @@ const chart = {
         myChart.setOption(option)
         // console.log(option);
     },
+    riskArea(id, title, data) {
+        // 基于准备好的dom，初始化echarts实例
+        var main = document.getElementById(id)
+        var myChart = echarts.init(main)
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: title,
+                left: 'center',
+                textStyle: {
+                    color: '#333',
+                    fontStyle: 'italic',
+                    fontSize: 10,
+                    fontWeight: 'normal'
+                }
+            },
+            tooltip: {
+                show: true,
+                trigger: 'item',
+                // 点击触发提示框
+                triggerOn: 'click',
+                alwaysShowContent: true,
+                // 进入提示框中，添加链接
+                enterable: true,
+                position: 'bottom',
+                textStyle: {
+                    textBorderColor: "rgba(0, 187, 255, 1)",
+                    fontStyle: 'italic',
+                    fontSize: '0.5rem',
+                    fontWeight: 'normal'
+                },
+                // padding: [5,10],
+                formatter: function (item) {
+                    let html = '<div style="margin-left:0px"><div style="margin: 0; pading:0;">地区: '+item.name+'</div>'+'<div>风险地区: '+item.value+'</div></div><a href="#/province/'+item.name+'" style="color:#00bec7;">详情</a>'
+                    return html
+                }
+            },
+            visualMap: {
+                // 离散
+                type: 'piecewise',
+                // 图形垂直排列
+                orient: 'horizontal',
+                // 图形在文字右边
+                align: 'left',
+                left: 'center',
+                top: 'bottom',
+                inRange: {
+                    color: ['#FFFFFF', '#ffc0b1', '#ff8c71', '#ef1717', '#9c0505'],
+                },
+                /* 不指定 min/max，表示 min/max 为无限大（Infinity
+                表示 value 等于 123 的情况。*/
+                pieces: [
+                    { gte: 10, label: "风险地区数>=10" },
+                    { min: 1, max: 9, label: "风险地区数1-9" },
+                    { value: 0 },
+                ],
+                // 文本与小块距离
+                textGap: 5,
+                // 每个小块间的距离
+                itemGap: 10,
+                showLabel: true,
+                itemWidth: 10,
+                itemHeight: 10,
+                textStyle: {
+                    color: '#333',
+                    fontSize: 10
+                }
+            },
+            series: [
+                {
+                    name: '省',
+                    type: 'map',
+                    map: 'china',
+                    zoom: 1.1,
+                    // 漫遊和縮放
+                    roam: true,
+                    // 标签
+                    label: {
+                        show: true,
+                        formatter: '{b}',
+                        fontSize: 10,
+                        rich: {
+                            area: {
+                                align: 'right',
+                                color: '#eee'
+                            },
+                            hr: {
+                                width: 0,
+                                height: '100%',
+                                borderWidth: 0.2,
+                                borderColor: '#777'
+                            }
+                        }
+                    },
+                    itemStyle: {
+                        color: '#029fd4',
+                        // 选中区域高亮
+                        emphasis: {
+                            areaColor: '#ddb926',
+                            opacity: 0.8,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)',
+                            // 模糊度
+                            shadowBlur: 10,
+                            // 垂直方向上偏移量
+                            shadowOffsetY: 2,
+                        },
+                    },
+                    data: data,
+                },
+            ],
+        }
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option)
+        // console.log(option);
+    },
 }
 export default chart 

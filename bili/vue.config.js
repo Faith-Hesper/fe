@@ -29,6 +29,15 @@ module.exports = {
                 pathRewrite: {
                     '^/bili': 'https://api.bilibili.com'
                 }
+            },
+            '/gaode': {
+                target: 'https://restapi.amap.com',
+                ws: true,
+                changeOrigin: true,
+                secure: true,
+                pathRewrite: {
+                    '^/gaode': 'https://restapi.amap.com'
+                }
             }
         },
     }

@@ -31,6 +31,7 @@ async function dxyData() {
         let { data: dom } = res
         // 解析丁香园dom得到数据
         let riskArea = JSON.parse(dom.getElementById('fetchRecentStatV2').text.split('=')[1].slice(0, -11))
+        // console.log(riskArea)
         // 添加id
         riskArea = riskArea.map((item, index) => {
             item.id = index
