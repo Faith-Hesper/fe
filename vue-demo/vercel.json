@@ -3,6 +3,18 @@
         {
             "source": "/interface/(.*)",
             "destination": "/interface/proxy"
+        },
+        {
+            "source": "/api/(.*)",
+            "destination": "/api/proxy"
+        },
+        {
+            "source": "/ncov/(.*)",
+            "destination": "/ncov/proxy"
+        },
+        {
+            "source": "/juhe/(.*)",
+            "destination": "/juhe/proxy"
         }
     ]
 }
