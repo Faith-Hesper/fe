@@ -47,6 +47,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
     fetchRecentStatV2 近期疫情分布 | 高中风险地区
         yesterdayLocalConfirmedCount 昨日本土新增
         currentDangerCount 风险地区
+        dangerCountIncr 新增风险地区
     ```
 ### 部署
 1. 配置vue
