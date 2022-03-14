@@ -57,17 +57,19 @@ const chart = {
                 表示 value 等于 123 的情况。*/
                 pieces: [
                     { gt: 10000 },
+                    { gt: 5000, lte: 10000 },
                     { gt: 2500, lte: 5000 },
                     { min: 1000, max: 2500 },
                     { min: 500, max: 1000 },
                     { min: 100, max: 500 },
                     { min: 10, max: 100 },
-                    { lt: 10 },
+                    { gt: 0, lt: 10 },
+                    { value: 0 }
                 ],
                 // 文本与小块距离
                 textGap: 5,
                 // 每个小块间的距离
-                itemGap: 2,
+                itemGap: 5,
                 showLabel: true,
                 itemWidth: 10,
                 itemHeight: 10,
@@ -176,9 +178,9 @@ const chart = {
                     { value: 0}
                 ],
                 // 文本与小块距离
-                textGap: 5,
+                textGap: 8,
                 // 每个小块间的距离
-                itemGap: 2,
+                itemGap: 5,
                 showLabel: true,
                 itemWidth: 10,
                 itemHeight: 10,
@@ -271,12 +273,14 @@ const chart = {
                 表示 value 等于 123 的情况。*/
                 pieces: [
                     { gt: 10000 },
+                    { gt: 5000, lte: 10000 },
                     { gt: 2500, lte: 5000 },
                     { min: 1000, max: 2500 },
                     { min: 500, max: 1000 },
                     { min: 100, max: 500 },
                     { min: 10, max: 100 },
-                    { lt: 10 },
+                    { gt: 0, lt: 10 },
+                    { value: 0 }
                 ],
                 // 文本与小块距离
                 textGap: 5,

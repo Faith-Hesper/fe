@@ -147,7 +147,7 @@ export default {
         console.log(this.active); 
         },
         // 动态列表
-        listClick(cityes,id,event) {
+        listClick(cityes,id,e) {
 
             // console.log(cityes);
             cityes.forEach(item=>{
@@ -156,7 +156,7 @@ export default {
             })
             // console.log(this.riskArea);
             // console.log(this.$refs[id]);
-            console.log(event.style);
+            console.log(e.target.style.backgroundColor)
         },
         detail(provinceShortName,province_json) {
             // console.log(province_json);
