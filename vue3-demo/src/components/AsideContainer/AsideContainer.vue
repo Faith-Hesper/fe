@@ -10,7 +10,12 @@
     <!-- <el-radio-button :label="false">展开</el-radio-button> -->
     <!-- <el-radio-button :label="true">缩回</el-radio-button> -->
     <!-- </el-radio-group> -->
-    <el-menu :collapse="isCollapse" @open="handleOpen" @close="handleClose" default-active="1">
+    <el-menu
+      :collapse="isCollapse"
+      @open="handleOpen"
+      @close="handleClose"
+      default-active="1"
+    >
       <el-sub-menu index="1">
         <template #title>
           <el-icon><location /></el-icon>
@@ -46,51 +51,43 @@
   <!-- </el-aside> -->
 </template>
 
+<script setup>
+  import { onMounted, ref } from "vue";
+
+  // 组件名必须加引号
+  let currentIconComponent = ref("expand");
+  let expand_text = ref("展开");
+  let times = 0;
+  // 默认缩回
+  let isCollapse = ref(true);
+  const handleOpen = (key, keyPath) => {
+    // console.log(key, keyPath)
+  };
+  const handleClose = (key, keyPath) => {
+    // console.log(key, keyPath)
+  };
+  function btn_expand() {
+    if (times == 0) {
+      isCollapse.value = false;
+      currentIconComponent.value = "fold";
+      expand_text.value = "缩回";
+      times++;
+    } else {
+      isCollapse.value = true;
+      currentIconComponent.value = "expand";
+      // console.log('111',isCollapse);
+      expand_text.value = "";
+      times = 0;
+    }
+  }
+</script>
 <script>
-import { onMounted, ref } from 'vue'
-
 export default {
-  setup() {
-    // 组件名必须加引号
-    let currentIconComponent = ref('expand')
-    let expand_text = ref('展开')
-    let times = 0
-    // 默认缩回
-    let isCollapse = ref(true)
-    const handleOpen = (key, keyPath) => {
-      // console.log(key, keyPath)
-    }
-    const handleClose = (key, keyPath) => {
-      // console.log(key, keyPath)
-    }
-
-    function btn_expand() {
-      if (times == 0) {
-        isCollapse.value = false
-        currentIconComponent.value = 'fold'
-        expand_text.value = '缩回'
-        times++
-      } else {
-        isCollapse.value = true
-        currentIconComponent.value = 'expand'
-        // console.log('111',isCollapse);
-        expand_text.value = ''
-        times = 0
-      }
-    }
-    return {
-      expand_text,
-      currentIconComponent,
-      isCollapse,
-      handleOpen,
-      handleClose,
-      btn_expand,
-    }
-  },
-}
+  setup() {},
+};
 </script>
 
-<style >
+<style scoped>
 .el-button {
   width: 65px;
   justify-content: center;
