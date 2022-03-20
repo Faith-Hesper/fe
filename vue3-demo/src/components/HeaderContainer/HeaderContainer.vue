@@ -3,14 +3,13 @@
   <div class="search">
     <span class="example-demonstration">搜索</span>
     <el-cascader
-      v-model="searchText"
+      v-model="searchArea"
       placeholder="搜索"
-      :options="areaList"
       :show-all-levels="false"
       :clearable="true"
       :props="prop"
       filterable
-      @change="text"
+      @change="searchBtn"
     />
   </div>
   Header
@@ -19,45 +18,44 @@
 </template>
 
 <script setup>
-import { onMounted, ref, reactive } from 'vue'
-// import { dataPro } from '../../utils/typeTransform'
-import { areaList } from '../../utils/areaList'
-import mapInite, { map, myIcon } from '../../utils/map'
+import { onMounted, ref, reactive, shallowReactive } from 'vue'
+import { province_list, city_list, county_list } from '../../utils/areaListPrimary'
+import { ponit } from '../../utils/map'
 import getCoordsPoint from '../../utils/getCoordsPoint'
 
-const searchText = ref('110000')
-let pointsLocation = []
-let earthQuakePoint = reactive({})
+const searchArea = ref('110000')
 const prop = reactive({
   // expandTrigger: 'hover',
-  checkStrictly: true,
+  loading: false,
+  // checkStrictly: true, // 取消父子节点关联
   emitPath: false,
+  lazy: true,
+  lazyLoad(node, resolve) {
+    const { level, value } = node
+    if (level == 0) {
+      resolve(province_list)
+    } else if (level == 1) {
+      let citys = city_list.filter((item) => {
+        // 市前两位与省前两位相同
+        return item.value.slice(0, 2) == value.slice(0, 2)
+      })
+      resolve(citys)
+    } else if (level == 2) {
+      let countys = county_list.filter((item) => {
+        // 县前两位与市前两位相同
+        return item.value.slice(0, 2) == value.slice(0, 2)
+      })
+      countys.forEach((item) => {
+        item.leaf = true
+      })
+      resolve(countys)
+    }
+  },
 })
-// const options = areaList
-const text = async (value)=>{
-  let markers = []
-  if (pointsLocation.length!=0) {
-    map.removeLayer(earthQuakePoint.value)
-    earthQuakePoint.value = null
-  }
-  // 地区点位
-  // L.marker.remove()
+
+const searchBtn = async (value) => {
   let points = await getCoordsPoint(1, value)
-  await new Promise((resolve, reject) => {
-    map.flyTo(points[0].location,10)
-    points.forEach((item) => {
-      pointsLocation.push(item.location)
-      let marker = L.marker(item.location, { icon: myIcon })
-        marker.on('mousemove', (e) => {
-          e.target.bindPopup(`<p>地区: ${item.adname}</p><p>类型: ${item.name}</p>`).openPopup()
-        })
-        marker.on('mouseout', (e) => {
-          e.target.closePopup()
-        })
-        markers.push(marker)
-    })
-    earthQuakePoint.value = L.layerGroup(markers).addTo(map)
-  })
+  await ponit(points)
 }
 
 onMounted(() => {
@@ -68,7 +66,6 @@ onMounted(() => {
 <script>
 export default {
   name: 'Header',
-  
 }
 </script>
 

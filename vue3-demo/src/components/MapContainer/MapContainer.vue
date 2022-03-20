@@ -22,20 +22,8 @@ export default {
       let k = 0
       for (let i = 0; i <= 5; i++) {}
     }
-    const data = onMounted(() => {
-      mapInite()
-      // // 地区点位
-      // getCoordsPoint(1).then((points) => {
-      //   // console.log(points)
-      //   points.forEach((item) => {
-      //     L.marker(item.location, { icon: myIcon })
-      //       .on('mousemove', (e) => {
-      //         // console.log(e)
-      //       })
-      //       .bindPopup(`<p>地区: ${item.adname}</p><p>类型: ${item.name}</p>`)
-      //       .addTo(map)
-      //   })
-      // })
+    const data = onMounted(async () => {
+      await mapInite()
     })
     return {
       data,

@@ -3933,7 +3933,7 @@ async function dataPro() {
 
   let allData = await Promise.all([province, city, county])
 
-  // console.log(allData);
+  // console.log(allData)
   let city_county = await new Promise((resolve, reject) => {
     let tempcity = allData[1].map(prov => {
       let citys = allData[2].filter(item => {
