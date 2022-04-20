@@ -1,5 +1,5 @@
 # vue-demo
-    丁香医生项目
+   [丁香医生项目](https://lntano.top/dxy/#/home)
 ## Project setup
 ```
 npm install
